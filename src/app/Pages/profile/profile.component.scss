@@ -1,0 +1,75 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.home button {
+  padding: 5px 22px;
+  border-radius: 10px;
+  background-color: #1056d6;
+  border: 1px solid #1056d6;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.home button:hover {
+  background-color: #567b9c;
+  transition: 0.5s;
+}
+
+.profile {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  background-color: #d9dde0;
+  border-radius: 10px;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.dates {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 80%;
+  padding: 15px;
+  background-color: #ccc;
+  border-radius: 10px;
+}
+
+.dates th, .dates td {
+  text-align: left;
+}
+
+.dates table {
+  margin-top: 10px;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.dates table th {
+  background-color: #807a7a;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.dates table td {
+  padding: 10px;
+  font-size: 18px;
+  background-color: #ebe8e8;
+}

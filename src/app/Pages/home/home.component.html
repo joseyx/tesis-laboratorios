@@ -1,0 +1,44 @@
+<nav>
+  <div class="nav-links">
+    <a class="nav-link" href="home">
+      <button>Inicio</button>
+    </a>
+    <a class="nav-link" href="#contact">
+      <button>Contacto</button>
+    </a>
+  </div>
+  @if (userLogIn) {
+    <div class="perfil">
+      <p-splitButton
+        size="large"
+        [model]="user"
+        icon="pi pi-user"
+        [rounded]="true"
+        severity="info"
+        (onClick)="navigateToProfile()"
+        raised />
+    </div>
+  }
+  @else {
+    <div class="perfil-2">
+      <div class="auth-links">
+        <a class="login" href="login">
+          <button>Iniciar sesión</button>
+        </a>
+        <a class="register" href="register">
+          <button>Registrarse</button>
+        </a>
+      </div>
+    </div>
+  }
+</nav>
+
+<footer id="contact">
+  <div>
+    <h2>Contacto</h2>
+    <p>Si tienes alguna duda o sugerencia, no dudes en contactarnos.</p>
+    <p>Correo: <a href="mailto:jose@jose.com">jose&#64;gmail.com</a></p>
+  </div>
+</footer>
+
+
