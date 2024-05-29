@@ -1,0 +1,142 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  width: 15.5rem;
+}
+
+.home button {
+  padding: 5px 22px;
+  border-radius: 10px;
+  background-color: #1056d6;
+  border: 1px solid #1056d6;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.home button:hover {
+  background-color: #567b9c;
+  transition: 0.5s;
+}
+
+.profile {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  background-color: #d9dde0;
+  border-radius: 10px;
+}
+
+.profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.back {
+  margin-left: auto;
+}
+
+.back button {
+  padding: 15px 50px;
+  border-radius: 10px;
+  background-color: #17ad94;
+  border: 1px solid #17ad94;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.back button:hover {
+  background-color: #14816f;
+  transition: 0.5s;
+}
+
+.container {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f4f9;
+  width: 62%;
+  height: 36rem;
+  border-radius: 50px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.inputRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  margin: 0 2rem;
+}
+
+.inputBox label {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form input {
+  width: 20rem;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+form input[type="file"] {
+  cursor: pointer;
+  width: 40rem;
+}
+
+form .send {
+  display: flex;
+  justify-content: center;
+  font-size: 17px;
+  padding: 10px;
+  margin: 5px 0 10px 0;
+  border-radius: 15px;
+  border: 1px solid #8fabcf;
+  color: white;
+  background-color: #1056d6;
+  cursor: pointer;
+}
+
+form .send:hover {
+  background-color: #567b9c;
+  transition: 0.5s;
+}

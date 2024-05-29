@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  width: 15.5rem;
 }
 
 .home button {
@@ -39,6 +40,25 @@
   display: flex;
   flex-direction: column;
   margin-left: 20px;
+}
+
+.edit {
+  margin-left: auto;
+}
+
+.edit button {
+  padding: 15px 50px;
+  border-radius: 10px;
+  background-color: #17ad94;
+  border: 1px solid #17ad94;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.edit button:hover {
+  background-color: #14816f;
+  transition: 0.5s;
 }
 
 .dates {
