@@ -7,14 +7,14 @@
 <div class="container">
   <div class="box">
     <h2>Iniciar sesión</h2>
-    <form action="" method="">
+    <form [formGroup]="form" (submit)="submit()">
       <div class="inputBox">
-        <label for="email">Correo o nombre de usuario:</label>
-        <input type="email" name="email" placeholder="Correo o Nombre de usuario..." required="">
+        <label for="email">Correo electrónico:</label>
+        <input formControlName="email" type="email" name="email" placeholder="Correo electrónico..." required="">
       </div>
       <div class="inputBox">
         <label for="password">Contraseña:</label>
-        <input type="password" name="password" placeholder="********" required="">
+        <input formControlName="password" type="password" name="password" placeholder="********" required="">
       </div>
       <input class="send" type="submit" value="Confirmar">
     </form>
