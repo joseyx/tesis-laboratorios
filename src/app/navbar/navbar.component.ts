@@ -5,11 +5,12 @@ import { FeaturesComponent } from '../features/features.component';
 import  { ServiciosComponent } from '../servicios/servicios.component';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
 import { FooterComponent } from '../footer/footer.component';
+import { TestimoniosComponent } from '../testimonios/testimonios.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CarrouselComponent, AboutComponent, FeaturesComponent, ServiciosComponent, ChatbotComponent,FooterComponent],
+  imports: [CarrouselComponent, AboutComponent, FeaturesComponent, ServiciosComponent, ChatbotComponent, TestimoniosComponent, FooterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
