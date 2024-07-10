@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { Error404Component } from './error404/error404.component';
+import { TestimoniosComponent } from './testimonios/testimonios.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -11,5 +12,6 @@ export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'chatbot', component: ChatbotComponent},
-  {path: '**', component: Error404Component }
+  {path: 'testimonios', component: TestimoniosComponent},
+  {path: '**', component: Error404Component}
 ];
