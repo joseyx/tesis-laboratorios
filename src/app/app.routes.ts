@@ -7,6 +7,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { CitasPageComponent } from './pages/citas-page/citas-page.component';
 import { PerfilPageComponent } from './pages/perfil-page/perfil-page.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { UsersTableComponent } from './admin/users-table/users-table.component';
+import { UsersCreateComponent } from './admin/users-create/users-create.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -37,9 +39,18 @@ export const routes: Routes = [
         component: PerfilPageComponent
       },
       {
+        path: 'users',
+        component: UsersTableComponent
+      },
+      {
+        path: 'users-create',
+        component: UsersCreateComponent
+      },
+      {
         path: '**',
         component: Error404Component
       }
     ]
   },
+  {path: '**', component: Error404Component}
 ];
