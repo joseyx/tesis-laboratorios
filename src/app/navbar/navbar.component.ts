@@ -7,11 +7,22 @@ import { ChatbotComponent } from '../chatbot/chatbot.component';
 import { CitasComponent } from '../citas/citas.component';
 import { FooterComponent } from '../footer/footer.component';
 import { TestimoniosComponent } from '../testimonios/testimonios.component';
+import { PerfilComponent } from '../perfil/perfil.component';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CarrouselComponent, AboutComponent, FeaturesComponent, ServiciosComponent, ChatbotComponent, CitasComponent, TestimoniosComponent, FooterComponent],
+  imports: [
+    CarrouselComponent,
+    AboutComponent,
+    FeaturesComponent,
+    ServiciosComponent,
+    ChatbotComponent,
+    CitasComponent,
+    TestimoniosComponent,
+    FooterComponent,
+    PerfilComponent
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
