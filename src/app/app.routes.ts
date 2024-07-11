@@ -7,10 +7,14 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { CitasPageComponent } from './pages/citas-page/citas-page.component';
 import { PerfilPageComponent } from './pages/perfil-page/perfil-page.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
+import { UsersTableComponent } from './admin/users-table/users-table.component';
+import { UsersCreateComponent } from './admin/users-create/users-create.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'users', component: UsersTableComponent},
+  {path: 'users-create', component: UsersCreateComponent},
   {
     path: '',
     component: NavbarComponent,
@@ -42,4 +46,5 @@ export const routes: Routes = [
       }
     ]
   },
+  {path: '**', component: Error404Component}
 ];
