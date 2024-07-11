@@ -112,3 +112,9 @@ button[type="submit"]:hover {
 button[type="submit"]:active {
   background: #74abe6;
 }
+
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+}
