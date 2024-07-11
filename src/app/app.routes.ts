@@ -13,8 +13,6 @@ import { UsersCreateComponent } from './admin/users-create/users-create.componen
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'users', component: UsersTableComponent},
-  {path: 'users-create', component: UsersCreateComponent},
   {
     path: '',
     component: NavbarComponent,
@@ -39,6 +37,14 @@ export const routes: Routes = [
       {
         path: 'perfil',
         component: PerfilPageComponent
+      },
+      {
+        path: 'users',
+        component: UsersTableComponent
+      },
+      {
+        path: 'users-create',
+        component: UsersCreateComponent
       },
       {
         path: '**',
