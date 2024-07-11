@@ -1,0 +1,41 @@
+<div class="main">
+  <div class="container">
+    <header>Formulario de Registro</header>
+    <form action="#" class="form" (submit)="createUser()">
+      <div class="column">
+        <div class="input-box">
+          <label for="name">Nombre</label>
+          <input type="text" id="name" name="name" placeholder="Nombre" />
+        </div>
+        <div class="input-box">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="Correo electrónico" />
+        </div>
+      </div>
+      <div class="column">
+        <div class="input-box">
+          <label for="phone">Telefóno</label>
+          <input type="number" id="phone" name="phone" placeholder="Telefóno" />
+        </div>
+        <div class="input-box">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" placeholder="Contraseña" />
+        </div>
+      </div>
+      <div class="input-box">
+        <label for="role">Rol</label>
+        <div>
+          <input type="radio" id="role_admin" name="role" value="administrador" />
+          <label for="role_admin">Administrador</label>
+        </div>
+        <div>
+          <input type="radio" id="role_user" name="role" value="usuario" />
+          <label for="role_user">Usuario</label>
+        </div>
+      </div>
+      <div class="input-box">
+        <button type="submit">Crear usuario</button>
+      </div>
+    </form>
+  </div>
+</div>

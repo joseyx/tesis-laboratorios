@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="table-container">
+    <h1 class="heading">Listado de completo de Usuarios</h1>
+
+    <div class="create">
+      <button class="create" (click)="createUser()">+Agregar usuario</button>
+    </div>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Correo electrónico</th>
+          <th>Número de telefóno</th>
+          <th>Imágen</th>
+          <th>Rol</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of users; track $index) {
+          <tr>
+            <td data-label="Nombre"> {{ user.name }} </td>
+            <td data-label="Correo electrónico"> {{ user.email }} </td>
+            <td data-label="Telefóno"> {{ user.phone }} </td>
+            <td data-label="Imágen">
+              <img [src]="user.image" alt="Imágen">
+            </td>
+            <td data-label="Rol"> {{ user.role }} </td>
+            <td data-label="Acción">
+              <button class="edit" (click)="editUser(user)">Editar</button>
+              <button class="delete" (click)="deleteUser(user)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
