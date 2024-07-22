@@ -1,39 +1,42 @@
-<div class="container">
-  <div class="table-container">
-    <h1 class="heading">Listado de completo de Usuarios</h1>
+<div class="container-fluid py-5">
+  <div class="container">
+    <div class="table-container">
+      <h1 class="display-6 mb-4 text-center">Listado Completo de Usuarios</h1>
 
-    <div class="create">
-      <button class="create" (click)="createUser()">+Agregar usuario</button>
+      <div class="text-end mb-3">
+        <button class="btn btn-primary create-button" (click)="createUser()">+ Agregar Usuario</button>
+      </div>
+
+
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th>Nombre</th>
+              <th>Correo Electrónico</th>
+              <th>Número de Teléfono</th>
+              <th>Imagen</th>
+              <th>Rol</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td data-label="Nombre">{{ user.name }}</td>
+              <td data-label="Correo Electrónico">{{ user.email }}</td>
+              <td data-label="Número de Teléfono">{{ user.phone }}</td>
+              <td data-label="Imagen">
+                <img [src]="user.image" alt="Imagen" class="img-fluid rounded" style="max-width: 50px;">
+              </td>
+              <td data-label="Rol">{{ user.role }}</td>
+              <td data-label="Acción">
+                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Correo electrónico</th>
-          <th>Número de telefóno</th>
-          <th>Imágen</th>
-          <th>Rol</th>
-          <th>Acción</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (user of users; track $index) {
-          <tr>
-            <td data-label="Nombre"> {{ user.name }} </td>
-            <td data-label="Correo electrónico"> {{ user.email }} </td>
-            <td data-label="Telefóno"> {{ user.phone }} </td>
-            <td data-label="Imágen">
-              <img [src]="user.image" alt="Imágen">
-            </td>
-            <td data-label="Rol"> {{ user.role }} </td>
-            <td data-label="Acción">
-              <button class="edit" (click)="editUser(user)">Editar</button>
-              <button class="delete" (click)="deleteUser(user)">Eliminar</button>
-            </td>
-          </tr>
-        }
-      </tbody>
-    </table>
   </div>
 </div>

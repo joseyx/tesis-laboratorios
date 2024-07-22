@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-users-table',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf
+  ],
   templateUrl: './users-table.component.html',
   styleUrl: './users-table.component.scss'
 })

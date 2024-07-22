@@ -8,8 +8,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 20px;
+  min-height: 90vh; /* Reduce el espacio libre arriba y abajo */
+  padding: 10px; /* Reduce el padding */
   background-color: #f5f5f5;
 }
 
@@ -18,7 +18,7 @@
   max-width: 700px;
   width: 100%;
   background: #fff;
-  padding: 25px;
+  padding: 20px; /* Reduce el padding */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -27,17 +27,17 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 15px; /* Reduce el margen inferior */
   text-align: center;
 }
 
 .container .form {
-  margin-top: 20px;
+  margin-top: 10px; /* Reduce el margen superior */
 }
 
 .form .input-box {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 15px; /* Reduce el margen superior */
 }
 
 .input-box label {
@@ -46,7 +46,7 @@
 
 .form .input-box input {
   position: relative;
-  height: 50px;
+  height: 45px; /* Reduce la altura */
   width: 100%;
   outline: none;
   font-size: 1rem;
@@ -64,7 +64,7 @@
 .role-selection {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 15px; /* Reduce el margen superior */
 }
 
 .radio-buttons {
