@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="container">
+    <header>Formulario de Edición</header>
+    <form class="form" (ngSubmit)="updateCita()">
+      <div class="input-box">
+        <label for="date">date de Perfil:</label>
+        <input type="date" id="date" [(ngModel)]="cita.date" name="date" placeholder="" />
+      </div>
+      <div class="role-selection">
+        <div class="role-label">
+          <label>Estado de la cita:</label> <!-- Assuming you have a general label for the role -->
+        </div>
+        <div class="radio-buttons">
+          <div>
+            <input type="radio" id="status_pendiente" [(ngModel)]="cita.status" name="status" value="pendiente" />
+            <label for="status_pendiente">Pendiente</label>
+          </div>
+          <div>
+            <input type="radio" id="status_realizada" name="status" value="realizada" />
+            <label for="status_realizada">Realizada</label>
+          </div>
+          <div>
+            <input type="radio" id="status_cancelada" name="status" value="cancelada" />
+            <label for="status_cancelada">Cancelada</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-box">
+        <button type="submit">Actualizar Cita</button>
+      </div>
+    </form>
+  </div>
+</div>

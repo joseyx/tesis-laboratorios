@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NgForOf, NgOptimizedImage } from '@angular/common';
 import { CitasService } from '../../services/citas.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,8 +22,10 @@ export class PerfilComponent implements OnInit {
   //   { fecha: '2024-07-25', tipo: 'Control General', estado: 'Pendiente' },
   // ];
   private citasService = inject(CitasService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   citas: any[] = [];
+  user: any;
 
   ngOnInit(): void {
     this.getCitas();
@@ -38,8 +41,17 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+  loadUser() {
+    this.authService.getUser().then(user => {
+      this.user = user;
+      console.log('User fetched successfully', user);
+    }).catch(error => {
+      console.error('Error fetching user', error);
+    });
+  }
+
   editPerfil() {
-    console.log('Edit perfil');
-    this.router.navigate(['/perfil-edit']);
+    const userID = this.user.id;
+    this.router.navigate(['/perfil-edit', userID]);
   }
 }

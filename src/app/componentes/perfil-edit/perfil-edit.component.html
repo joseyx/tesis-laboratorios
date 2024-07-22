@@ -1,33 +1,33 @@
 <div class="main">
   <div class="container">
     <header>Formulario de Actualización</header>
-    <form action="#" class="form" (submit)="editUser()">
+    <form class="form" (ngSubmit)="editUser()">
       <div class="column">
         <div class="input-box">
           <label for="name">Nombre:</label>
-          <input type="text" id="name" name="name" placeholder="Nombre..." />
+          <input type="text" id="name" [(ngModel)]="user.name" name="name" placeholder="Nombre..." />
         </div>
         <div class="input-box">
           <label for="email">Correo electrónico:</label>
-          <input type="email" id="email" name="email" placeholder="Correo..." />
+          <input type="email" id="email" [(ngModel)]="user.email" name="email" placeholder="Correo..." />
         </div>
       </div>
       <div class="column">
         <div class="input-box">
           <label for="phone">Número de telefóno:</label>
-          <input type="number" id="phone" name="phone" placeholder="Telefóno..." />
+          <input type="number" id="phone" [(ngModel)]="user.phone" name="phone" placeholder="Telefóno..." />
         </div>
         <div class="input-box">
           <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" placeholder="Contraseña..." />
+          <input type="password" id="password" [(ngModel)]="user.password" name="password" placeholder="Contraseña..." />
         </div>
       </div>
       <div class="input-box">
         <label for="imagen">Imagen de Perfil:</label>
-        <input type="file" id="imagen" name="imagen" placeholder="" />
+        <input type="file" id="imagen" [(ngModel)]="user.image" name="imagen" placeholder="" />
       </div>
       <div class="input-box">
-        <button type="submit">Editar usuario</button>
+        <button type="submit">Actualizar perfil</button>
       </div>
     </form>
   </div>

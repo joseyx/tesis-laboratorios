@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users-table',
@@ -19,7 +20,8 @@ export class UsersTableComponent {
   //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'user' },
   //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'user' },
   // ]
-  private usersService = inject(UsuariosService);
+  private userService = inject(UsuariosService);
+  private router = inject(Router);
   users: any[] = [];
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class UsersTableComponent {
   }
 
   getUsers() {
-    this.usersService.getUsers().subscribe({
+    this.userService.getUsers().subscribe({
       next: (users: any) => {
         this.users = users;
         console.log('Users fetched successfully', users);
@@ -37,14 +39,20 @@ export class UsersTableComponent {
   }
 
   createUser(){
-    console.log('Create user');
+    this.router.navigate(['users-create']);
   }
 
   editUser(id: any) {
-    console.log('Edit user');
+    this.router.navigate(['users-edit', id]);
   }
 
   deleteUser(id: any) {
-    console.log('Delete user');
+    this.userService.deleteUser(id).subscribe({
+      next: () => {
+        this.users = this.users.filter(user => user.id !== id);
+        console.log('User deleted successfully');
+      },
+      error: (error) => console.error('Error deleting user', error)
+    })
   }
 }

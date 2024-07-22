@@ -11,6 +11,8 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { UsersTableComponent } from './admin/users-table/users-table.component';
 import { UsersCreateComponent } from './admin/users-create/users-create.component';
 import { UsersEditComponent } from './admin/users-edit/users-edit.component';
+import { CitasTableComponent } from './admin/citas-table/citas-table.component';
+import { CitasEditComponent } from './admin/citas-edit/citas-edit.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -37,11 +39,19 @@ export const routes: Routes = [
         component: CitasPageComponent
       },
       {
+        path: 'citas-table',
+        component: CitasTableComponent
+      },
+      {
+        path: 'citas-edit/:id',
+        component: CitasEditComponent
+      },
+      {
         path: 'perfil',
         component: PerfilPageComponent
       },
       {
-        path: 'perfil-edit',
+        path: 'perfil-edit/:id',
         component: PerfilEditComponent
       },
       {
@@ -53,7 +63,7 @@ export const routes: Routes = [
         component: UsersCreateComponent
       },
       {
-        path: 'users-edit',
+        path: 'users-edit/:id',
         component: UsersEditComponent
       },
       {

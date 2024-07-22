@@ -1,10 +1,10 @@
 <div class="main">
   <div class="container">
     <header>Formulario de Edición</header>
-    <form action="#" class="form" (submit)="updateUser()">
+    <form class="form" (ngSubmit)="updateUser()">
       <div class="input-box">
         <label for="imagen">Imagen de Perfil:</label>
-        <input type="file" id="imagen" name="imagen" placeholder="" />
+        <input type="file" id="imagen" [(ngModel)]="user.image" name="imagen" placeholder="" />
       </div>
       <div class="role-selection">
         <div class="role-label">
@@ -12,7 +12,7 @@
         </div>
         <div class="radio-buttons">
           <div>
-            <input type="radio" id="role_admin" name="role" value="administrador" />
+            <input type="radio" id="role_admin" [(ngModel)]="user.role" name="role" value="administrador" />
             <label for="role_admin">Administrador</label>
           </div>
           <div>
