@@ -1,0 +1,29 @@
+<div class="main">
+  <div class="container">
+    <header>Formulario de Edición</header>
+    <form action="#" class="form" (submit)="updateUser()">
+      <div class="input-box">
+        <label for="imagen">Imagen de Perfil:</label>
+        <input type="file" id="imagen" name="imagen" placeholder="" />
+      </div>
+      <div class="role-selection">
+        <div class="role-label">
+          <label>Rol del usuario:</label> <!-- Assuming you have a general label for the role -->
+        </div>
+        <div class="radio-buttons">
+          <div>
+            <input type="radio" id="role_admin" name="role" value="administrador" />
+            <label for="role_admin">Administrador</label>
+          </div>
+          <div>
+            <input type="radio" id="role_medic" name="role" value="medico" />
+            <label for="role_medic">Médico</label>
+          </div>
+        </div>
+      </div>
+      <div class="input-box">
+        <button type="submit">Actualizar Usuario</button>
+      </div>
+    </form>
+  </div>
+</div>

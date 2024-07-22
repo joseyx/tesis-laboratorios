@@ -1,12 +1,12 @@
-<img class="wave" ngSrc="../../../assets/img/wave.png" height="1700" width="1400">
+<img class="wave" src="../../../assets/img/wave.png">
 <div class="container">
   <div class="img">
-    <img ngSrc="../../../assets/img/bg.svg" alt="" height="840" width="1010" />
+    <img src="../../../assets/img/bg.svg" />
   </div>
   <div class="login-content">
     <form (ngSubmit)="onSubmit()">
-      <img ngSrc="../../../assets/img/avatar.svg" alt="" height="698" width="698" />
-      <h2 class="title">Gusto en conocerle!</h2>
+      <img src="../../../assets/img/avatar.svg" />
+      <h2 class="title">¡Gusto en conocerle!</h2>
       <div class="input-div one" [class.focus]="name.length > 0 || focus">
         <div class="i">
           <i class="fas fa-user"></i>
@@ -34,7 +34,7 @@
         <input type="password" class="input" [(ngModel)]="password" name="password" />
         </div>
       </div>
-      <a href="login">Si ya tienes cuenta ingresa aquí</a>
+      <a href="login">Si ya tienes una cuenta ingresa aquí</a>
       <button type="submit" class="btn">Registrarse</button>
     </form>
   </div>

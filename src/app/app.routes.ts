@@ -6,9 +6,11 @@ import { InicioComponent } from './pages/inicio/inicio.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { CitasPageComponent } from './pages/citas-page/citas-page.component';
 import { PerfilPageComponent } from './pages/perfil-page/perfil-page.component';
+import { PerfilEditComponent } from './componentes/perfil-edit/perfil-edit.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { UsersTableComponent } from './admin/users-table/users-table.component';
 import { UsersCreateComponent } from './admin/users-create/users-create.component';
+import { UsersEditComponent } from './admin/users-edit/users-edit.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -39,12 +41,20 @@ export const routes: Routes = [
         component: PerfilPageComponent
       },
       {
+        path: 'perfil-edit',
+        component: PerfilEditComponent
+      },
+      {
         path: 'users',
         component: UsersTableComponent
       },
       {
         path: 'users-create',
         component: UsersCreateComponent
+      },
+      {
+        path: 'users-edit',
+        component: UsersEditComponent
       },
       {
         path: '**',
