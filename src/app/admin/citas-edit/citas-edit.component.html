@@ -1,10 +1,13 @@
 <div class="main">
   <div class="container">
     <header>Formulario de Edición</header>
-    <form class="form" (ngSubmit)="updateCita()">
+    <form #updateForm="ngForm" class="form" (ngSubmit)="onSubmit(updateForm)">
       <div class="input-box">
-        <label for="date">date de Perfil:</label>
-        <input type="date" id="date" [(ngModel)]="cita.date" name="date" placeholder="" />
+        <label for="date">Fecha de la Cita:</label>
+        <input type="date" id="date" [(ngModel)]="cita.date" #dateInput required #dateField="ngModel" [min]="minDate" name="date" />
+        <div *ngIf="dateField.invalid && (dateField.dirty || dateField.touched)" class="error">
+          <div *ngIf="dateField.errors?.['required']">La fecha es obligatoria.</div>
+        </div>
       </div>
       <div class="role-selection">
         <div class="role-label">
@@ -12,21 +15,27 @@
         </div>
         <div class="radio-buttons">
           <div>
-            <input type="radio" id="status_pendiente" [(ngModel)]="cita.status" name="status" value="pendiente" />
+            <input type="radio" id="status_pendiente" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="pendiente" />
             <label for="status_pendiente">Pendiente</label>
           </div>
           <div>
-            <input type="radio" id="status_realizada" name="status" value="realizada" />
+            <input type="radio" id="status_realizada" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="realizada" />
             <label for="status_realizada">Realizada</label>
           </div>
           <div>
-            <input type="radio" id="status_cancelada" name="status" value="cancelada" />
+            <input type="radio" id="status_cancelada" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="cancelada" />
             <label for="status_cancelada">Cancelada</label>
           </div>
         </div>
+        <div *ngIf="roleField.invalid && (roleField.dirty || roleField.touched)" class="error">
+          <div *ngIf="roleField.errors?.['required']">El estado es obligatorio.</div>
+        </div>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
       </div>
       <div class="input-box">
-        <button type="submit">Actualizar Cita</button>
+        <button type="submit" class="btn" [disabled]="updateForm.invalid">Actualizar Cita</button>
       </div>
     </form>
   </div>
