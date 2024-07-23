@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('nameInput') nameInput!: ElementRef;
   focus = false;
   name = '';
@@ -25,6 +25,12 @@ export class RegisterComponent {
 
   setFocus(hasFocus: boolean) {
     this.focus = hasFocus;
+  }
+
+  ngOnInit() {
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigate(['/']);
+    }
   }
 
   ngAfterViewInit() {

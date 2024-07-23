@@ -68,7 +68,7 @@
           </div>
         </div>
 
-        <a routerLink="/login" class="link-login">Si ya tienes cuenta ingresa aquí</a>
+        <a routerLink="/login" class="link-login" [class.login]="(confirmPasswordField.touched || confirmPasswordField.invalid) && (confirmPasswordField.errors?.['required'] || passwordsDoNotMatch)">Si ya tienes cuenta ingresa aquí</a>
         <button type="submit" class="btn" [disabled]="registerForm.invalid || passwordsDoNotMatch">Registrarse</button>
       </form>
     </div>
