@@ -8,7 +8,7 @@
         <h1 class="display-6 mb-3">Dr. John Martin</h1>
         <p class="mb-1">Paciente</p>
         <p class="mb-5">Labsky, New York, USA</p>
-        <button class="btn btn-secondary" (click)="editPerfil()">Editar Perfil</button>
+        <button class="btn btn-secondary"[disabled]="!user" (click)="editPerfil()">Editar Perfil</button>
       </div>
 
     </div>

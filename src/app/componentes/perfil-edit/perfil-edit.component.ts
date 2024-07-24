@@ -87,24 +87,15 @@ export class PerfilEditComponent implements OnInit, AfterViewInit {
   }
 
   loadUser(id: number) {
-    this.userService.getUser(id).subscribe({
-      next: (user: any) => {
-        this.user = user;
-        console.log('User fetched successfully', user);
-      },
-      error: (error) => console.error('Error fetching user', error)
+    this.userService.getUserID(id)
+    .then((user: any) => {
+      this.user = user;
+      console.log('User retrieved successfully', user);
+    })
+    .catch((error: any) => {
+      console.error('Error fetching user', error);
     });
   }
-
-  // editUser() {
-  //   this.userService.updateUser(this.userID, this.user).subscribe({
-  //     next: (response) => {
-  //       console.log('User updated successfully', response);
-  //       this.router.navigate(['perfil']); // Redirige al perfil del usuario o donde quieras
-  //     },
-  //     error: (error) => console.error('Error updating user', error)
-  //   });
-  // }
 
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {

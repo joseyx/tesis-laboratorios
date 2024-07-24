@@ -28,29 +28,34 @@
         </div>
         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
           <h2 class="mb-4">Realizar Cita</h2>
-    <div class="row g-3">
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <input type="datetime-local" class="form-control" id="date" name="date" required>
-                <label for="date">Fecha y Hora</label>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-floating">
-                <select class="form-select" id="service" name="service" required>
+          <form #citasForm="ngForm" (ngSubmit)="onSubmit(citasForm)">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="form-floating">
+                  <input type="datetime-local" class="form-control" [(ngModel)]="cita.date" required date #dateField="ngModel" id="date" name="date" required>
+                  <div *ngIf="dateField.invalid && (dateField.dirty || dateField.touched)" class="error">
+                    <div *ngIf="dateField.errors?.['required']">La fecha y hora son obligatorias.</div>
+                  </div>
+                  <label for="date">Fecha y Hora</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-floating">
+                  <select class="form-select" id="service" name="service" required>
                     <option selected disabled>Elige Un Servicio</option>
                     <option value="Tests de Patología">Tests de Patología</option>
                     <option value="Tests de Microbiología">Tests de Microbiología</option>
                     <option value="Tests Bioquímicos">Tests Bioquímicos</option>
                     <option value="Tests de Histopatología">Tests de Histopatología</option>
-                </select>
-                <label for="service">Servicio</label>
+                  </select>
+                  <label for="service">Servicio</label>
+                </div>
+              </div>
+              <div class="col-12 text-center">
+                <button class="btn btn-primary w-100 py-3" type="submit" [disabled]="citasForm.invalid">Crear Cita</button>
+              </div>
             </div>
-        </div>
-        <div class="col-12 text-center">
-            <button class="btn btn-primary w-100 py-3" type="submit">Crear Cita</button>
-        </div>
-    </div>
+          </form>
         </div>
       </div>
     </div>

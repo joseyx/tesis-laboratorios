@@ -1,5 +1,5 @@
 import { NgFor } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CitasService } from '../../services/citas.service';
 import { Router } from '@angular/router';
 
@@ -20,12 +20,13 @@ export class CitasTableComponent {
   }
 
   getCitas() {
-    this.citaService.getAllCitas().subscribe({
-      next: (citas: any) => {
-        this.citas = citas;
-        console.log('Citas fetched successfully', citas);
-      },
-      error: (error) => console.error('Error fetching citas', error)
+    this.citaService.getAllCitas()
+    .then((citas: any) => {
+      this.citas = citas;
+      console.log('Citas fetched successfully', citas);
+    })
+    .catch((error: any) => {
+      console.error('Error fetching citas', error);
     });
   }
 

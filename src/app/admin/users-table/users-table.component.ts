@@ -13,13 +13,6 @@ import { Router } from '@angular/router';
   styleUrl: './users-table.component.scss'
 })
 export class UsersTableComponent {
-  // users = [
-  //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'admin' },
-  //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'medico' },
-  //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'medico' },
-  //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'user' },
-  //   { name: 'Jose', email: 'jose@jose.com', phone: '123456789', image: '../../assets/img/avatar.svg', role: 'user' },
-  // ]
   private userService = inject(UsuariosService);
   private router = inject(Router);
   users: any[] = [];
@@ -29,13 +22,14 @@ export class UsersTableComponent {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe({
-      next: (users: any) => {
-        this.users = users;
-        console.log('Users fetched successfully', users);
-      },
-      error: (error) => console.error('Error fetching users', error)
-    });
+    this.userService.getAllusers()
+    .then((users: any) => {
+      this.users = users;
+      console.log('Users fetched successfully', users);
+    })
+    .catch((error: any) => {
+      console.error('Error fetching users', error);
+    })
   }
 
   createUser(){
@@ -47,12 +41,13 @@ export class UsersTableComponent {
   }
 
   deleteUser(id: any) {
-    this.userService.deleteUser(id).subscribe({
-      next: () => {
-        this.users = this.users.filter(user => user.id !== id);
-        console.log('User deleted successfully');
-      },
-      error: (error) => console.error('Error deleting user', error)
+    this.userService.deleteUser(id)
+    .then((response: any) => {
+      console.log('User deleted successfully', response);
+      this.getUsers();
     })
+    .catch((error: any) => {
+      console.error('Error deleting user', error);
+    });
   }
 }

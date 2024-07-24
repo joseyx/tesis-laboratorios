@@ -36,7 +36,7 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.authService.isUserLoggedIn()) {
       this.citaID = +this.route.snapshot.paramMap.get('id')!;
-      this.getCita(this.citaID);
+      // this.getCita(this.citaID);
     }
 
     const today = new Date();
@@ -66,24 +66,26 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
   }
 
   getCita(id: number) {
-    this.citaService.getCitaID(id).subscribe({
-      next: (cita: any) => {
-        this.cita = cita;
-        console.log('Cita fetched succssfully', cita);
-      },
-      error: (error) => console.log('There was an error!', error)
+    this.citaService.getCitaID(id)
+    .then((cita: any) => {
+      this.cita = cita;
+      console.log('Citas fetched successfully', cita);
     })
+    .catch((error: any) => {
+      console.error('Error fetching citas', error);
+    });
   }
 
-  // updateCita() {
-  //   this.citaService.updateCita(this.citaID, this.cita).subscribe({
-  //     next: (response) => {
-  //       console.log('Cita updated successfully!', response);
-  //       this.router.navigate(['/citas-table']);
-  //     },
-  //     error: (error) => console.log('There was an error!', error)
-  //   })
-  // }
+  updateCita() {
+    this.citaService.updateCita(this.citaID, this.cita)
+    .then((response: any) => {
+      console.log('Cita updated successfully!', response);
+      this.router.navigate(['/citas-table']);
+    })
+    .catch((error: any) => {
+      console.error('There was an error!', error);
+    });
+  }
 
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
@@ -113,4 +115,53 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
       console.log('Form is invalid or passwords do not match');
     }
   }
+
+  // getCita(id: number) {
+  //   this.citaService.getCitaID(id).subscribe({
+  //     next: (cita: any) => {
+  //       this.cita = cita;
+  //       console.log('Cita fetched succssfully', cita);
+  //     },
+  //     error: (error) => console.log('There was an error!', error)
+  //   })
+  // }
+
+  // updateCita() {
+  //   this.citaService.updateCita(this.citaID, this.cita).subscribe({
+  //     next: (response) => {
+  //       console.log('Cita updated successfully!', response);
+  //       this.router.navigate(['/citas-table']);
+  //     },
+  //     error: (error) => console.log('There was an error!', error)
+  //   })
+  // }
+
+  // async onSubmit(form: NgForm): Promise<void> {
+  //   if (form.valid) {
+  //     try {
+  //       const response = await this.citaService.updateCita(this.citaID, this.cita);
+  //       console.log('Cita updated successfully', response);
+  //       this.successMessage = 'Cita actualizada exitosamente.';
+  //       setTimeout(() => {
+  //         this.router.navigate(['/citas-table']);
+  //       }, 2000);
+  //     } catch (error) {
+  //       console.error('Error updating user', error);
+  //       // @ts-ignore
+  //       if (error.response && error.response.data) {
+  //         // @ts-ignore
+  //         if (error.response.data.error === 'Date not valid') {
+  //           this.errorMessage = 'Seleccione una fecha válida.';
+  //         } else {
+  //           // @ts-ignore
+  //           this.errorMessage = error.response.data.detail || 'Error en el registro. Por favor, inténtalo de nuevo más tarde.';
+  //         }
+  //       } else {
+  //         this.errorMessage = 'Error en el registro. Por favor, inténtalo de nuevo más tarde.';
+  //       }
+  //     }
+  //   } else {
+  //     console.log('Form is invalid or passwords do not match');
+  //   }
+  // }
 }

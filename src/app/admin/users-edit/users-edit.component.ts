@@ -61,12 +61,24 @@ export class UsersEditComponent implements OnInit, AfterViewInit {
   }
 
   getUser(id: number) {
-    this.userService.getUser(id).subscribe({
-      next: (user: any) => {
-        this.user = user;
-        console.log('User fetched succssfully', user);
-      },
-      error: (error) => console.error('There was an error!', error)
+    this.userService.getUserID(id)
+    .then((user: any) => {
+      this.user = user;
+      console.log('User retrieved successfully!', user);
+    })
+    .catch((error: any) => {
+      console.error('There was an error!', error);
+    })
+  }
+
+  updateUser() {
+    this.userService.updateUser(this.userID, this.user)
+    .then((response: any) => {
+      console.log('User updated successfully!', response);
+      this.router.navigate(['/users']);
+    })
+    .catch((error: any) => {
+      console.error('There was an error!', error);
     })
   }
 

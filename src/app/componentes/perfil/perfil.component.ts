@@ -15,13 +15,7 @@ import { Router } from '@angular/router';
   styleUrl: './perfil.component.scss'
 })
 export class PerfilComponent implements OnInit {
-  // citas = [
-  //   { fecha: '2024-07-01', tipo: 'Examen de Sangre', estado: 'Completada' },
-  //   { fecha: '2024-07-15', tipo: 'Análisis de Orina', estado: 'Pendiente' },
-  //   { fecha: '2024-07-20', tipo: 'Prueba de Alergia', estado: 'Cancelada' },
-  //   { fecha: '2024-07-25', tipo: 'Control General', estado: 'Pendiente' },
-  // ];
-  private citasService = inject(CitasService);
+  private citaService = inject(CitasService);
   private authService = inject(AuthService);
   private router = inject(Router);
   citas: any[] = [];
@@ -29,15 +23,17 @@ export class PerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCitas();
+    this.loadUser();
   }
 
   getCitas() {
-    this.citasService.getCitas().subscribe({
-      next: (citas: any) => {
-        this.citas = citas;
-        console.log('Citas fetched successfully', citas);
-      },
-      error: (error) => console.error('Error fetching citas', error)
+    this.citaService.getPersonalCitas()
+    .then((citas: any) => {
+      this.citas = citas;
+      console.log('Citas fetched successfully', citas);
+    })
+    .catch((error: any) => {
+      console.error('Error fetching citas', error);
     });
   }
 
@@ -51,6 +47,10 @@ export class PerfilComponent implements OnInit {
   }
 
   editPerfil() {
+    if (!this.user) {
+      console.error('User is not loaded yet');
+      return;
+    }
     const userID = this.user.id;
     this.router.navigate(['/perfil-edit', userID]);
   }
