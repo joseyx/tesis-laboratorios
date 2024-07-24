@@ -20,7 +20,7 @@ export class AuthService {
     };
 
     const response = await this.axiosService.post(
-      'auth/register',
+      'register',
       registerData
     );
     const accessToken = response.data.token;
@@ -39,8 +39,8 @@ export class AuthService {
     };
     console.log(loginData);
 
-    const response = await this.axiosService.post('auth/login', loginData);
-    const accessToken = response.data.token;
+    const response = await this.axiosService.post('login', loginData);
+    const accessToken = response.data.jwt;
 
     if (accessToken) {
       this.storeAccessToken(accessToken);
@@ -50,15 +50,14 @@ export class AuthService {
   }
 
   async getUser() {
-    const response = await this.axiosService.get('auth/user');
+    const response = await this.axiosService.get('usuario');
+    console.log(response.data);
     return response.data;
   }
 
   async logout() {
-    const response = await this.axiosService.post('auth/logout', {});
-    console.log(response);
+    const response = await this.axiosService.post('logout', {});
     this.cookieService.delete('accessToken');
-    console.log(this.getAccessToken());
     return response.data;
   }
 

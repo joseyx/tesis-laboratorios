@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent implements OnInit, AfterViewInit {
+  @ViewChild('nameInput') nameInput!: ElementRef;
   focus = false;
   name = '';
   email = '';
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="password"]');
     const confirmPasswordInput = document.querySelector('input[name="confirmPassword"]');
+
     // @ts-ignore
     if (nameInput && nameInput['value']) {
       // @ts-ignore

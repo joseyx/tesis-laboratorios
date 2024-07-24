@@ -69,8 +69,9 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contacto</a>
                         <div class="navbar-nav navbar-nav-right">
-                          <a href="login" class="nav-item nav-link">Iniciar Sesión</a>
-                          <a href="register" class="nav-item nav-link">Registrarse</a>
+                          <a *ngIf="!isLoggedIn" routerLink="login" class="nav-item nav-link">Iniciar Sesión</a>
+                          <a *ngIf="!isLoggedIn" href="register" class="nav-item nav-link">Registrarse</a>
+                          <a *ngIf="isLoggedIn" (click)="logout()" class="nav-item nav-link btn-cerrar-sesion">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>

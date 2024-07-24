@@ -8,9 +8,11 @@
       <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
         <img ngSrc="../../../assets/img/avatar.svg" alt="" height="698" width="698" />
         <h2 class="title">Gusto en conocerle!</h2>
+
         <div *ngIf="errorMessage" class="error-message">
           {{ errorMessage }}
         </div>
+
         <div class="input-div one" [class.focus]="name.length > 0 || focus">
           <div class="i">
             <i class="fas fa-user"></i>
@@ -23,6 +25,7 @@
             </div>
           </div>
         </div>
+
         <div class="input-div one" [class.focus]="email.length > 0 || focus">
           <div class="i">
             <i class="fas fa-user"></i>
@@ -36,6 +39,7 @@
             </div>
           </div>
         </div>
+
         <div class="input-div pass" [class.focus]="password.length > 0 || focus">
           <div class="i">
             <i class="fas fa-lock"></i>
@@ -49,6 +53,7 @@
             </div>
           </div>
         </div>
+
         <div class="input-div pass" [class.focus]="confirmPassword.length > 0 || focus">
           <div class="i">
             <i class="fas fa-lock"></i>
