@@ -1,33 +1,45 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios.service';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-users-create',
+  selector: 'app-perfil-edit',
   standalone: true,
   imports: [FormsModule, RouterLink, NgOptimizedImage, NgIf, NgClass],
-  templateUrl: './users-create.component.html',
-  styleUrl: './users-create.component.scss'
+  templateUrl: './perfil-edit.component.html',
+  styleUrl: './perfil-edit.component.scss'
 })
-export class UsersCreateComponent implements AfterViewInit {
+export class PerfilEditComponent implements OnInit, AfterViewInit {
   user: any = {
     name: '',
     email: '',
     password: '',
     phone: '',
-    role: ''
+    image: '',
   };
 
   errorMessage = '';
   successMessage = '';
 
+  userID!: number;
+
   constructor(
     private userService: UsuariosService,
     private router: Router,
     private route: ActivatedRoute,
+    private authService: AuthService
   ) {}
+
+
+  ngOnInit(): void {
+    if (this.authService.isUserLoggedIn()) {
+      this.userID = +this.route.snapshot.paramMap.get('id')!;
+      this.loadUser(this.userID);
+    }
+  }
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -40,7 +52,8 @@ export class UsersCreateComponent implements AfterViewInit {
     const emailInput = document.querySelector('input[name="email"]');
     const phoneInput = document.querySelector('input[name="phone"]');
     const passwordInput = document.querySelector('input[name="password"]');
-    const roleInput = document.querySelector('input[name="role"]');
+    const imageInput = document.querySelector('input[name="image"]');
+    const confirmPasswordInput = document.querySelector('input[name="confirmPassword"]');
     // @ts-ignore
     if (nameInput && nameInput['value']) {
       // @ts-ignore
@@ -62,20 +75,45 @@ export class UsersCreateComponent implements AfterViewInit {
       passwordInput.closest('.input-div').classList.add('focus');
     }
     // @ts-ignore
-    if (roleInput && roleInput['value']) {
+    if (confirmPasswordInput && confirmPasswordInput['value']) {
       // @ts-ignore
-      roleInput.closest('.input-div').classList.add('focus');
+      confirmPasswordInput.closest('.input-div').classList.add('focus');
+    }
+    // @ts-ignore
+    if (imageInput && imageInput['value']) {
+      // @ts-ignore
+      imageInput.closest('.input-div').classList.add('focus');
     }
   }
+
+  loadUser(id: number) {
+    this.userService.getUser(id).subscribe({
+      next: (user: any) => {
+        this.user = user;
+        console.log('User fetched successfully', user);
+      },
+      error: (error) => console.error('Error fetching user', error)
+    });
+  }
+
+  // editUser() {
+  //   this.userService.updateUser(this.userID, this.user).subscribe({
+  //     next: (response) => {
+  //       console.log('User updated successfully', response);
+  //       this.router.navigate(['perfil']); // Redirige al perfil del usuario o donde quieras
+  //     },
+  //     error: (error) => console.error('Error updating user', error)
+  //   });
+  // }
 
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
       try {
-        const response = await this.userService.createUser(this.user);
+        const response = await this.userService.updateUser(this.userID, this.user);
         console.log('User updated successfully', response);
         this.successMessage = 'Usuario actualizado exitosamente.';
         setTimeout(() => {
-          this.router.navigate(['/users']);
+          this.router.navigate(['/perfil']);
         }, 2000);
       } catch (error) {
         console.error('Error updating user', error);
@@ -97,13 +135,26 @@ export class UsersCreateComponent implements AfterViewInit {
     }
   }
 
-  // createUser() {
-  //   this.userService.createUser(this.user).subscribe({
-  //     next: (response) => {
-  //       console.log('User created successfully', response);
-  //       this.router.navigate(['users']);
-  //     },
-  //     error: (error) => console.error('Error creating user', error)
-  //   })
-  // }
+  onFileChange(event: any) {
+    const files = event.target.files;
+
+    if (files && files.length > 0) {
+      const file = files[0];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
+      if (allowedTypes.includes(file.type)) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.user.image = e.target.result; // Puedes almacenar la URL base64 si deseas mostrar una vista previa de la imagen
+          console.log('Imagen cargada', this.user.image);
+        };
+        reader.readAsDataURL(file);
+        this.errorMessage = '';
+      } else {
+        this.errorMessage = 'Solo se permiten archivos de tipo JPG, JPEG o PNG.';
+      }
+    } else {
+      this.errorMessage = 'No se ha seleccionado ningún archivo.';
+    }
+  }
 }
