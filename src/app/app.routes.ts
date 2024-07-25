@@ -55,15 +55,15 @@ export const routes: Routes = [
         component: PerfilEditComponent
       },
       {
-        path: 'users',
+        path: 'usuarios-table',
         component: UsersTableComponent
       },
       {
-        path: 'users-create',
+        path: 'usuarios-create',
         component: UsersCreateComponent
       },
       {
-        path: 'users-edit/:id',
+        path: 'usuarios-edit/:id',
         component: UsersEditComponent
       },
       {

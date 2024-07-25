@@ -10,13 +10,18 @@
                 <th>Fecha</th>
                 <th>Tipo de Cita</th>
                 <th>Estado</th>
+                <th>Acción</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let cita of citas">
-                <td data-label="Fecha">{{ cita.fecha }}</td>
-                <td data-label="Tipo de Cita">{{ cita.tipo }}</td>
+                <td data-label="Fecha y Hora">{{ cita.date }}</td>
+                <td data-label="Tipo de Cita">{{ cita.description }}</td>
                 <td data-label="Estado">{{ cita.estado }}</td>
+                <td data-label="Acción">
+                  <button class="btn btn-secondary btn-sm me-2" (click)="editCita(cita)">Editar</button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteCita(cita)">Eliminar</button>
+                </td>
               </tr>
             </tbody>
           </table>

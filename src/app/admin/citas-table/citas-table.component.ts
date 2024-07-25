@@ -33,4 +33,15 @@ export class CitasTableComponent {
   editCita(id: number) {
     this.router.navigate(['/citas-edit', id]);
   }
+
+  deleteCita(id: any) {
+    this.citaService.deleteCita(id)
+    .then((response: any) => {
+      console.log('Cita deleted successfully', response);
+      this.getCitas();
+    })
+    .catch((error: any) => {
+      console.error('Error deleting cita', error);
+    });
+  }
 }

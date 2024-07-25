@@ -12,35 +12,35 @@ export class UsuariosService {
   ) {
   }
 
-  async login(email: string, password: string) {
-    const loginData = {
-      email: email,
-      password: password,
-    };
-    console.log(loginData);
+  // async login(email: string, password: string) {
+  //   const loginData = {
+  //     email: email,
+  //     password: password,
+  //   };
+  //   console.log(loginData);
 
-    const response = await this.axiosService.post('auth/login', loginData);
-    const accessToken = response.data.token;
+  //   const response = await this.axiosService.post('auth/login', loginData);
+  //   const accessToken = response.data.token;
 
-    if (accessToken) {
-      this.storeAccessToken(accessToken);
-    }
+  //   if (accessToken) {
+  //     this.storeAccessToken(accessToken);
+  //   }
 
-    return response.data;
-  }
+  //   return response.data;
+  // }
 
-  async getUser() {
-    const response = await this.axiosService.get('auth/user');
-    return response.data;
-  }
+  // async getUser() {
+  //   const response = await this.axiosService.get('auth/user');
+  //   return response.data;
+  // }
 
-  async logout() {
-    const response = await this.axiosService.post('auth/logout', {});
-    console.log(response);
-    this.cookieService.delete('accessToken');
-    console.log(this.getAccessToken());
-    return response.data;
-  }
+  // async logout() {
+  //   const response = await this.axiosService.post('auth/logout', {});
+  //   console.log(response);
+  //   this.cookieService.delete('accessToken');
+  //   console.log(this.getAccessToken());
+  //   return response.data;
+  // }
 
   async getAllusers() {
     const response = await this.axiosService.get(
@@ -84,38 +84,17 @@ export class UsuariosService {
     return response.data;
   }
 
-  // getUsers(): Observable<any> {
-  //   return this.http.get(baseUrl);
+  // private storeAccessToken(token: string): void {
+  //   this.cookieService.set('accessToken', token, undefined, '/'); // Path for cookie access
   // }
 
-  // getUser(id: number): Observable<any> {
-  //   return this.http.get(`${baseUrl}/${id}`);
+  // private getAccessToken(): string | null {
+  //   return this.cookieService.get('accessToken');
   // }
 
-  // createUser(user: any): Observable<any> {
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   return this.http.post(baseUrl, user, { headers });
+  // isUserLoggedIn(): boolean {
+  //   const accessToken = this.getAccessToken();
+  //   console.log(!!accessToken);
+  //   return !!accessToken;
   // }
-
-  // updateUser(id: number, user: any): Observable<any> {
-  //   return this.http.put(`${baseUrl}/${id}`, user);
-  // }
-
-  // deleteUser(id: number): Observable<any> {
-  //   return this.http.delete(`${baseUrl}/${id}`);
-  // }
-
-  private storeAccessToken(token: string): void {
-    this.cookieService.set('accessToken', token, undefined, '/'); // Path for cookie access
-  }
-
-  private getAccessToken(): string | null {
-    return this.cookieService.get('accessToken');
-  }
-
-  isUserLoggedIn(): boolean {
-    const accessToken = this.getAccessToken();
-    console.log(!!accessToken);
-    return !!accessToken;
-  }
 }

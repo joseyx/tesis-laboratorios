@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   async getUser() {
-    const response = await this.axiosService.get('usuario');
+    const response = await this.axiosService.get('user');
     console.log(response.data);
     return response.data;
   }

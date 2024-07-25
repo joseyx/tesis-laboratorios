@@ -33,11 +33,11 @@ export class UsersTableComponent {
   }
 
   createUser(){
-    this.router.navigate(['users-create']);
+    this.router.navigate(['usuarios-create']);
   }
 
   editUser(id: any) {
-    this.router.navigate(['users-edit', id]);
+    this.router.navigate(['usuarios-edit', id]);
   }
 
   deleteUser(id: any) {
