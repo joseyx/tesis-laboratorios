@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit, ViewEncapsulation, ElementRef, ViewChild, AfterViewChecked} from '@angular/core';
+import { Component, HostBinding, OnInit, ViewEncapsulation, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { MatIconRegistry, MatIconModule } from '@angular/material/icon';
 import { NgClass, NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,27 +17,35 @@ interface Message {
   standalone: true,
   imports: [MatIconModule, NgClass, FormsModule, NgForOf, NgIf, AutoResizeDirective],
   templateUrl: './chatbot.component.html',
-  styleUrl: './chatbot.component.scss',
+  styleUrls: ['./chatbot.component.scss'],
   encapsulation: ViewEncapsulation.ShadowDom
 })
-export class ChatbotComponent implements OnInit, AfterViewChecked{
+export class ChatbotComponent implements OnInit, AfterViewChecked {
 
   @HostBinding('class.show-chatbot') isChatbotVisible = false;
   @ViewChild('chatbox') chatbox!: ElementRef;
+
+  messages: Message[] = [
+    { text: 'Hola, soy el chatbot de LabSky. ¿En qué puedo ayudarte?', sender: 'model' }
+  ];
+  newMessage: string = '';
+  shouldScrollToBottom: boolean = true;
+
   constructor(
     private matIconRegistry: MatIconRegistry,
     private chatbotService: ChatbotService,
     private sanitizer: DomSanitizer
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.matIconRegistry.setDefaultFontSetClass('material-symbols-outlined');
+    const response = await this.chatbotService.getChatbotMessages();
+    console.log('Messages:', response.messages);
+    for (const message of response.messages) {
+      this.messages.push({ text: message.content, sender: message.role });
+    }
+    console.log('processed Messages:', this.messages);
   }
-
-  messages: Message[] = [
-    { text: 'Hola, soy el chatbot de LabSky. ¿En qué puedo ayudarte?', sender: 'model' }
-  ];
-  newMessage: string = '';
 
   async addMessage() {
     if (this.newMessage.trim()) {
@@ -48,12 +56,15 @@ export class ChatbotComponent implements OnInit, AfterViewChecked{
       const userMessage = this.newMessage;
       this.newMessage = '';
 
+      this.shouldScrollToBottom = true;
+
       setTimeout(() => this.scrollToBottom(), 0);
 
       // Envía el mensaje al servicio del chatbot y maneja la respuesta
       try {
         const botResponse = await this.chatbotService.sendMessage(userMessage);
         this.messages.push({ text: botResponse.response, sender: 'model' });
+        this.shouldScrollToBottom = true;
         setTimeout(() => this.scrollToBottom(), 0);
       } catch (error) {
         this.messages.push({ text: 'Lo siento, no pude procesar tu mensaje', sender: 'model', error: true });
@@ -64,19 +75,25 @@ export class ChatbotComponent implements OnInit, AfterViewChecked{
 
   ngAfterViewChecked() {
     // Scroll to the bottom when the view has been checked
-    this.scrollToBottom();
+    if (this.shouldScrollToBottom) {
+      this.scrollToBottom();
+    }
   }
 
   private scrollToBottom() {
     try {
       this.chatbox.nativeElement.scrollTop = this.chatbox.nativeElement.scrollHeight;
-    } catch(err) {
+      this.shouldScrollToBottom = false;
+    } catch (err) {
       console.error('Error al hacer scroll', err);
     }
   }
 
   toggleChatbot() {
     this.isChatbotVisible = !this.isChatbotVisible;
+    if (this.isChatbotVisible) {
+      setTimeout(() => this.scrollToBottom(), 0);
+    }
   }
 
   handleKeyDown(event: KeyboardEvent) {
@@ -114,5 +131,4 @@ export class ChatbotComponent implements OnInit, AfterViewChecked{
 
     return this.sanitizer.bypassSecurityTrustHtml(formattedText);
   }
-
 }
