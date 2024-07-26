@@ -2,12 +2,13 @@
   <div class="container pb-5">
     <div class="row g-5 align-items-center mb-5">
       <div class="col-md-6 wow fadeIn d-flex justify-content-center" data-wow-delay="0.3s">
-        <img class="img-fluid rounded" ngSrc="../../../assets/img/team-1.jpg" alt="Perfil del Usuario" height="350" width="350">
+        <img class="img-fluid rounded" ngSrc="../../../assets/img/placeholder.png" alt="Perfil del Usuario" height="350" width="350">
       </div>
       <div class="col-md-6 wow fadeIn" data-wow-delay="0.5s">
-        <h1 class="display-6 mb-3">Dr. John Martin</h1>
-        <p class="mb-1">Paciente</p>
-        <p class="mb-5">Labsky, New York, USA</p>
+        <h1 class="display-6 mb-3">{{ this.user.name }}</h1>
+        <p class="mb-1">{{ this.user.role }}</p>
+        <p class="mb-5">{{ this.user.phone }}</p>
+        <p class="mb-5">{{ this.user.email }}</p>
         <button class="btn btn-secondary" (click)="editPerfil()">Editar Perfil</button>
       </div>
 
@@ -26,8 +27,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let cita of citas">
-                <td data-label="Fecha">{{ cita.fecha }}</td>
-                <td data-label="Tipo de Cita">{{ cita.tipo }}</td>
+                <td data-label="Fecha">{{ cita.date }}</td>
+                <td data-label="Tipo de Cita">{{ cita.description }}</td>
                 <td data-label="Estado">{{ cita.estado }}</td>
               </tr>
             </tbody>
