@@ -11,6 +11,7 @@ import { ChatbotComponent } from '../chatbot/chatbot.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NgIf } from '@angular/common';
+import { ScrollService } from '../../services/scroll.service';
 
 @Component({
   selector: 'app-navbar',
@@ -36,14 +37,17 @@ export class NavbarComponent {
   protected isLoggedIn: boolean = false;
   name: string | undefined;
   isAdmin: boolean = false;
-  constructor(private authService: AuthService, ) {
+  constructor(
+    private authService: AuthService,
+    private scrollService: ScrollService
+  ) {
   }
 
   async ngOnInit() {
     this.isLoggedIn = this.authService.isUserLoggedIn();
     this.authService.getUser().then((data) => {
       this.name = data.name;
-      if (data.rol == 'Admin') {
+      if (data.role == 'admin') {
         this.isAdmin = true;
       }
     });
@@ -57,5 +61,9 @@ export class NavbarComponent {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  scrollToElement(id: string) {
+    this.scrollService.scrollToElementId(id);
   }
 }
