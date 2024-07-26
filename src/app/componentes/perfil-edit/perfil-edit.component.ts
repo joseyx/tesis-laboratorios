@@ -109,7 +109,7 @@ export class PerfilEditComponent implements OnInit, AfterViewInit {
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
       try {
-        const response = await this.userService.updateUser(this.userID, this.user);
+        const response = this.userService.updateUser(this.userID, this.user);
         console.log('User updated successfully', response);
         this.successMessage = 'Usuario actualizado exitosamente.';
         setTimeout(() => {

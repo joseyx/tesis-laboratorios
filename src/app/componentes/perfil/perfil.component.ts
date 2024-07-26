@@ -3,6 +3,9 @@ import { NgForOf, NgOptimizedImage } from '@angular/common';
 import { CitasService } from '../../services/citas.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserInterface, CitaInterface } from '../../utils/interfaces';
+import { formatDateTime } from '../../helpers/helpers';
 
 @Component({
   selector: 'app-perfil',
@@ -24,21 +27,35 @@ export class PerfilComponent implements OnInit {
   private citasService = inject(CitasService);
   private authService = inject(AuthService);
   private router = inject(Router);
-  citas: any[] = [];
-  user: any;
+  citas: CitaInterface[] = [];
+  user: UserInterface = {
+    id: 0,
+    name: '',
+    email: '',
+    phone: '',
+    image: '',
+    role: ''
+  };
 
   ngOnInit(): void {
-    this.getCitas();
+    if (!this.authService.isUserLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+    this.loadUser();
+    this.getCitas().then(r => console.log('Citas fetched successfully', r));
   }
 
-  getCitas() {
-    this.citasService.getCitas().subscribe({
-      next: (citas: any) => {
-        this.citas = citas;
-        console.log('Citas fetched successfully', citas);
-      },
-      error: (error) => console.error('Error fetching citas', error)
-    });
+  async getCitas() {
+    try {
+      const response = this.citasService.getCitas();
+      this.citas = await response;
+      for (const cita of this.citas) {
+        cita.date = formatDateTime(cita.date);
+      }
+
+    } catch (error) {
+      console.error('Error fetching citas', error);
+    }
   }
 
   loadUser() {

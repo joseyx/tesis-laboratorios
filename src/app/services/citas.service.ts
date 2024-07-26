@@ -1,5 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { AxiosService } from './axios.service';
 import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8000/api/citas';
@@ -9,10 +11,14 @@ const baseUrl = 'http://localhost:8000/api/citas';
 })
 export class CitasService {
   private http = inject(HttpClient)
-  constructor() { }
+  constructor(
+    private axiosService: AxiosService,
+    private cookieService: CookieService
+  ) { }
 
-  getCitas(): Observable<any> {
-    return this.http.get(`${baseUrl}/list`);
+  async getCitas() {
+    const response = await this.axiosService.get('citas/list');
+    return response.data;
   }
 
   getCitaID(id: any): Observable<any> {
