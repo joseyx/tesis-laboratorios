@@ -17,3 +17,8 @@ export interface CitaInterface {
   resultado: string;
   estado: string;
 }
+
+export interface CreateCitaInterface {
+  date: Date;
+  description: string;
+}

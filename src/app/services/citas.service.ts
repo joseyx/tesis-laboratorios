@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { AxiosService } from './axios.service';
 import { Observable } from 'rxjs';
+import { CreateCitaInterface } from '../utils/interfaces';
 
 const baseUrl = 'http://localhost:8000/api/citas';
 
@@ -32,6 +33,11 @@ export class CitasService {
   createCita(cita: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(baseUrl, cita, { headers });
+  }
+
+  async axiosCreateCita(cita: CreateCitaInterface) {
+    const response = await this.axiosService.post('citas', cita);
+    return response.data;
   }
 
   updateCita(id: any, cita: any): Observable<any> {
