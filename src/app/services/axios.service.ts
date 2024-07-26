@@ -37,4 +37,8 @@ export class AxiosService {
   delete(url: string) {
     return this.httpClient.delete(url);
   }
+
+  patch(url: string, data: any) {
+    return this.httpClient.patch(url, data);
+  }
 }

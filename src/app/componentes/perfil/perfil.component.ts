@@ -51,6 +51,7 @@ export class PerfilComponent implements OnInit {
       this.citas = await response;
       for (const cita of this.citas) {
         cita.date = formatDateTime(cita.date);
+        cita.estado = cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1);
       }
 
     } catch (error) {
@@ -61,6 +62,7 @@ export class PerfilComponent implements OnInit {
   loadUser() {
     this.authService.getUser().then(user => {
       this.user = user;
+      this.user.role = this.user.role.charAt(0).toUpperCase() + this.user.role.slice(1);
       console.log('User fetched successfully', user);
     }).catch(error => {
       console.error('Error fetching user', error);

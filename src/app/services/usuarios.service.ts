@@ -1,6 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UserInterface } from '../utils/interfaces';
+import { AxiosService } from './axios.service';
 
 const baseUrl = 'http://localhost:8000/api/users';
 
@@ -9,7 +11,9 @@ const baseUrl = 'http://localhost:8000/api/users';
 })
 export class UsuariosService {
   private http = inject(HttpClient)
-  constructor() { }
+  constructor(
+        private axiosService: AxiosService,
+  ) { }
 
   getUsers(): Observable<any> {
     return this.http.get(baseUrl);
@@ -24,8 +28,9 @@ export class UsuariosService {
     return this.http.post(baseUrl, user, { headers });
   }
 
-  updateUser(id: number, user: any): Observable<any> {
-    return this.http.put(`${baseUrl}/${id}`, user);
+  async updateUser(user: UserInterface) {
+    const response = await this.axiosService.patch(`users/${user.id}`, user);
+    return response.data;
   }
 
   deleteUser(id: number): Observable<any> {
