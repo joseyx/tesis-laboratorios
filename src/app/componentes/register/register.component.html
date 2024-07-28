@@ -1,13 +1,13 @@
 <div>
-  <img class="wave" ngSrc="../../../assets/img/wave.png" height="1700" width="1400" alt="">
+  <img class="wave" ngSrc="../../../assets/img/wave_blue.png" alt="" height="1700" width="600">
   <div class="container">
     <div class="img">
       <img ngSrc="../../../assets/img/bg.svg" alt="" height="840" width="1010" />
     </div>
     <div class="login-content">
       <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
-        <img ngSrc="../../../assets/img/avatar.svg" alt="" height="698" width="698" />
-        <h2 class="title">Gusto en conocerle!</h2>
+        <img ngSrc="../../../assets/img/avatar.svg" height="350" width="350" alt="" />
+        <h2 class="title">¡Gusto en conocerle!</h2>
 
         <div *ngIf="errorMessage" class="error-message">
           {{ errorMessage }}

@@ -1,242 +1,226 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .wave {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    height: 100%;
-    z-index: -1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  z-index: -1;
 }
 
 .container {
-    width: 100vw;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 7rem;
-    padding: 0 2rem;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 7rem;
+  padding: 0 2rem;
+  overflow: hidden;
 }
 
 .img {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .login-content {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
 }
 
 .img img {
-    width: 500px;
+  width: 500px;
 }
 
 form {
-    width: 360px;
+  width: 360px;
+  padding-bottom: 2rem; /* Añadir espacio en la parte inferior para mensajes de error */
 }
 
 .login-content img {
-    height: 100px;
+  height: 100px;
 }
 
 .login-content h2 {
-    margin: 15px 0;
-    color: #333;
-    text-transform: uppercase;
-    font-size: 2.9rem;
+  margin: 15px 0;
+  color: #333;
+  text-transform: uppercase;
+  font-size: 2.9rem;
 }
 
 .login-content .input-div {
-    position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
-    margin: 25px 0;
-    padding: 5px 0;
-    border-bottom: 2px solid #d9d9d9;
-    padding-bottom: 1rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 7% 93%;
+  margin: 25px 0;
+  padding: 5px 0;
+  border-bottom: 2px solid #d9d9d9;
 }
 
 .login-content .input-div.one {
-    margin-top: 0;
-}
-
-.recover-pass {
-    color: #333;
+  margin-top: 0;
 }
 
 .i {
-    color: #d9d9d9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  color: #d9d9d9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .i i {
-    transition: .3s;
+  transition: .3s;
 }
 
 .input-div > div {
-    position: relative;
-    height: 45px;
+  position: relative;
+  height: 45px;
 }
 
 .input-div > div > h5 {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #999;
-    font-size: 18px;
-    transition: .3s;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 18px;
+  transition: .3s;
 }
 
 .input-div:before, .input-div:after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    width: 0%;
-    height: 2px;
-    background-color: #38d39f;
-    transition: .4s;
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: #0066FF;
+  transition: .4s;
 }
 
 .input-div:before {
-    right: 50%;
+  right: 50%;
 }
 
 .input-div:after {
-    left: 50%;
+  left: 50%;
 }
 
 .input-div.focus:before, .input-div.focus:after {
-    width: 50%;
+  width: 50%;
 }
 
 .input-div.focus > div > h5 {
-    top: -5px;
-    font-size: 15px;
+  top: -5px;
+  font-size: 15px;
 }
 
 .input-div.focus > .i > i {
-    color: #38d39f;
+  color: #0066FF;
 }
 
 .input-div > div > input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0.5rem 0.7rem;
-    font-size: 1.2rem;
-    color: #555;
-    font-family: 'poppins', sans-serif;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0.5rem 0.7rem;
+  font-size: 1.2rem;
+  color: #555;
+  font-family: 'poppins', sans-serif;
 }
 
 .input-div.pass {
-    margin-bottom: 4px;
+  margin-bottom: 4px;
+  margin-top: 4px;
 }
 
 a {
-    display: block;
-    text-align: right;
-    text-decoration: none;
-    color: #999;
-    font-size: 0.9rem;
-    transition: .3s;
+  display: block;
+  text-align: right;
+  text-decoration: none;
+  color: #999;
+  font-size: 0.9rem;
+  transition: .3s;
 }
 
 a:hover {
-    color: #38d39f;
+  color: #0004ff;
 }
 
 .btn {
-    display: block;
-    width: 100%;
-    height: 50px;
-    border-radius: 25px;
-    outline: none;
-    border: none;
-    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
-    background-size: 200%;
-    font-size: 1.2rem;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    text-transform: uppercase;
-    margin: 1rem 0;
-    cursor: pointer;
-    transition: .5s;
+  display: block;
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to right, #0066FF, #00b7ff, #0066FF);
+  background-size: 200%;
+  font-size: 1.2rem;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: .5s;
 }
 
 .btn:hover {
-    background-position: right;
+  background-position: right;
 }
 
-.error {
-    color: #d9534f; /* Color rojo para los errores */
-    font-size: 0.9rem;
-    margin-top: 5px;
-    position: absolute;
-    left: 0;
-    top: 100%;
-    text-align: left;
-    background: #fff; /* Fondo blanco para cubrir la línea */
-    padding: 0 5px; /* Espacio para que no toque los bordes */
+@media screen and (max-width: 1050px) {
+  .container {
+    grid-gap: 5rem;
+  }
 }
 
-.form-floating {
-    position: relative; /* Necesario para posicionar el mensaje de error */
-    margin-bottom: 2.5rem; /* Espacio adicional para los mensajes de error */
+@media screen and (max-width: 1000px) {
+  form {
+    width: 290px;
+  }
+
+  .login-content h2 {
+    font-size: 2.4rem;
+    margin: 8px 0;
+  }
+
+  .img img {
+    width: 400px;
+  }
 }
 
-.input-div {
-    position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
-    margin: 25px 0;
-    padding: 5px 0;
-    border-bottom: 2px solid #d9d9d9;
+@media screen and (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .img {
+    display: none;
+  }
+
+  .wave {
+    display: none;
+  }
+
+  .login-content {
+    justify-content: center;
+  }
 }
 
-.input-div > div {
-    position: relative;
-}
-
-.input-div > div > input,
-.input-div > div > select {
-    margin-bottom: 5px; /* Espacio adicional para los mensajes de error */
-}
-
-.input-div.one::after,
-.input-div.pass::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: transparent; /* Cambiar el color del fondo */
-    position: absolute;
-    bottom: -5px; /* Ajustar la posición para que no interfiera */
-    left: 0;
-}
-
-.enlace-registro {
-  color: black;
-  transition: .3s;
-  cursor: pointer;
-}
-
-.enlace-registro:hover {
-  color: gray;
+.hide {
+  display: none;
 }
 
 .error-message {
@@ -246,48 +230,63 @@ a:hover {
   text-align: center;
 }
 
-
-
-
-@media screen and (max-width: 1050px) {
-    .container {
-        grid-gap: 5rem;
-    }
+.success-message {
+  color: #5cb85c; /* Color verde para el mensaje de éxito */
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-@media screen and (max-width: 1000px) {
-    form {
-        width: 290px;
-    }
-
-    .login-content h2 {
-        font-size: 2.4rem;
-        margin: 8px 0;
-    }
-
-    .img img {
-        width: 400px;
-    }
+.error {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-align: left;
+  background: #fff; /* Fondo blanco para cubrir la línea */
+  padding: 0 5px; /* Espacio para que no toque los bordes */
+  position: absolute; /* Necesario para que el mensaje de error no cubra otros elementos */
+  left: 0;
+  top: 100%;
+  width: 100%;
 }
 
-@media screen and (max-width: 900px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
-
-    .img {
-        display: none;
-    }
-
-    .wave {
-        display: none;
-    }
-
-    .login-content {
-        justify-content: center;
-    }
+.input-div > div > input,
+.input-div > div > select {
+  margin-bottom: 5px; /* Espacio adicional para los mensajes de error */
 }
 
-.hide {
-    display: none;
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.link-login {
+  color: black;
+  text-decoration: none;
+}
+
+.link-login:hover {
+  color: gray;
+}
+
+.recover-pass {
+  color: #000000;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.recover-pass:hover {
+  color: gray;
+}
+
+.recover-pass:active {
+  color: #000000;
+}
+
+.login {
+  margin-top: 4rem;
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AxiosService } from './axios.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,8 @@ import { AxiosService } from './axios.service';
 export class AuthService {
   constructor(
     private axiosService: AxiosService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {
   }
 
@@ -58,6 +60,7 @@ export class AuthService {
   async logout() {
     const response = await this.axiosService.post('logout', {});
     this.cookieService.delete('accessToken');
+    this.router.navigate(['/inicio']);
     return response.data;
   }
 

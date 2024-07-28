@@ -32,4 +32,19 @@ export class CitasTableComponent {
   editCita(id: number) {
     this.router.navigate(['/citas-edit', id]);
   }
+
+  deleteCita(id: number) {
+    this.citaService.deleteCita(id).subscribe({
+      next: () => {
+        this.citas = this.citas.filter(cita => cita.id !== id);
+        console.log('Cita deleted successfully');
+      },
+      error: (error) => console.error('Error deleting cita', error)
+    });
+  }
+
+  capitalizeFirstLetter(name: string): string {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
 }

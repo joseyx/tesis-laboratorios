@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { UserInterface } from '../utils/interfaces';
 import { AxiosService } from './axios.service';
 
-const baseUrl = 'http://localhost:8000/api/users';
+const baseUrl = 'http://localhost:8080/api/users';
 
 @Injectable({
   providedIn: 'root'

@@ -22,16 +22,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
-              <td data-label="Nombre">{{ user.name }}</td>
+              <td data-label="Nombre">{{ capitalizeFirstLetter(user.name) }}</td>
               <td data-label="Correo Electrónico">{{ user.email }}</td>
               <td data-label="Número de Teléfono">{{ user.phone }}</td>
               <td data-label="Imagen">
                 <img [src]="user.image" alt="Imagen" class="img-fluid rounded" style="max-width: 50px;">
               </td>
-              <td data-label="Rol">{{ user.role }}</td>
+              <td data-label="Rol">{{ capitalizeFirstLetter(user.role) }}</td>
               <td data-label="Acción">
-                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user)">Editar</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Eliminar</button>
+                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user.id)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Eliminar</button>
               </td>
             </tr>
           </tbody>

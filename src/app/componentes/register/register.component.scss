@@ -19,6 +19,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 7rem;
   padding: 0 2rem;
+  overflow: hidden;
 }
 
 .img {
@@ -99,7 +100,7 @@ form {
   bottom: -2px;
   width: 0%;
   height: 2px;
-  background-color: #38d39f;
+  background-color: #0066FF;
   transition: .4s;
 }
 
@@ -121,7 +122,7 @@ form {
 }
 
 .input-div.focus > .i > i {
-  color: #38d39f;
+  color: #0066FF;
 }
 
 .input-div > div > input {
@@ -154,7 +155,7 @@ a {
 }
 
 a:hover {
-  color: #38d39f;
+  color: #0004ff;
 }
 
 .btn {
@@ -164,7 +165,7 @@ a:hover {
   border-radius: 25px;
   outline: none;
   border: none;
-  background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+  background-image: linear-gradient(to right, #0066FF, #00b7ff, #0066FF);
   background-size: 200%;
   font-size: 1.2rem;
   color: #fff;
@@ -273,5 +274,5 @@ input:-webkit-autofill:active {
 }
 
 .login {
-  margin-top: 4rem;
+  margin-top: 1rem;
 }

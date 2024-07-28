@@ -13,6 +13,8 @@
       </div>
 
     </div>
+    <app-modal-confirmar *ngIf="showModal" [message]="modalMessage" (confirm)="onConfirm($event)"></app-modal-confirmar>
+
     <div class="row">
       <div class="col-12">
         <h2 class="display-6 mb-4">Citas del Paciente</h2>
@@ -23,6 +25,7 @@
                 <th>Fecha</th>
                 <th>Tipo de Cita</th>
                 <th>Estado</th>
+                <th>Acción</th>
               </tr>
             </thead>
             <tbody>
@@ -30,6 +33,9 @@
                 <td data-label="Fecha">{{ cita.date }}</td>
                 <td data-label="Tipo de Cita">{{ cita.description }}</td>
                 <td data-label="Estado">{{ cita.estado }}</td>
+                <td data-label="Accion">
+                  <button class="btn btn-danger" (click)="cancelCita(cita.id)">Cancelar</button>
+                </td>
               </tr>
             </tbody>
           </table>

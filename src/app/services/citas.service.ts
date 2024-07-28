@@ -5,7 +5,7 @@ import { AxiosService } from './axios.service';
 import { Observable } from 'rxjs';
 import { CreateCitaInterface } from '../utils/interfaces';
 
-const baseUrl = 'http://localhost:8000/api/citas';
+const baseUrl = 'http://localhost:8080/api/citas';
 
 @Injectable({
   providedIn: 'root'

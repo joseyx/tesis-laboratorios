@@ -42,8 +42,8 @@ export class UsersTableComponent {
     this.router.navigate(['users-create']);
   }
 
-  editUser(id: any) {
-    this.router.navigate(['users-edit', id]);
+  editUser(id: number) {
+    this.router.navigate(['/users-edit', id]);
   }
 
   deleteUser(id: any) {
@@ -54,5 +54,10 @@ export class UsersTableComponent {
       },
       error: (error) => console.error('Error deleting user', error)
     })
+  }
+
+  capitalizeFirstLetter(name: string): string {
+    if (!name) return '';
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
   }
 }
