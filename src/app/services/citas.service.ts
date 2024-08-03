@@ -25,9 +25,14 @@ export class CitasService {
   getCitaID(id: any): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
   }
+  //
+  // getAllCitas(): Observable<any> {
+  //   return this.http.get(`${baseUrl}/list/all`);
+  // }
 
-  getAllCitas(): Observable<any> {
-    return this.http.get(`${baseUrl}/list/all`);
+  async getAllCitas() {
+    const response = await this.axiosService.get('citas/list/all');
+    return response.data;
   }
 
   createCita(cita: any): Observable<any> {

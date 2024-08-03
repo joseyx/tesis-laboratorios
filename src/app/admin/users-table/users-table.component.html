@@ -28,7 +28,7 @@
               <td data-label="Imagen">
                 <img [src]="user.image" alt="Imagen" class="img-fluid rounded" style="max-width: 50px;">
               </td>
-              <td data-label="Rol">{{ user.role }}</td>
+              <td data-label="Rol">{{ user.role.charAt(0).toUpperCase() + user.role.slice(1) }}</td>
               <td data-label="Acción">
                 <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user)">Editar</button>
                 <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Eliminar</button>
