@@ -29,12 +29,11 @@ export class UsersTableComponent {
   }
 
   getUsers() {
-    this.userService.getUsers().subscribe({
-      next: (users: any) => {
-        this.users = users;
-        console.log('Users fetched successfully', users);
-      },
-      error: (error) => console.error('Error fetching users', error)
+    const response = this.userService.getUsers()
+    response.then((users) => {
+      this.users = users;
+    }).catch((error) => {
+      console.error('Error fetching users', error);
     });
   }
 

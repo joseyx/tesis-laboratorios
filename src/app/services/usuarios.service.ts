@@ -15,9 +15,14 @@ export class UsuariosService {
         private axiosService: AxiosService,
   ) { }
 
-  getUsers(): Observable<any> {
-    return this.http.get(baseUrl);
+  // getUsers(): Observable<any> {
+  //   return this.http.get(baseUrl);
+  // }
+  async getUsers() {
+    const response = await this.axiosService.get('users');
+    return response.data;
   }
+
 
   getUser(id: number): Observable<any> {
     return this.http.get(`${baseUrl}/${id}`);
