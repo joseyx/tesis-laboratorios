@@ -8,7 +8,7 @@ import { TestimoniosComponent } from '../testimonios/testimonios.component';
 import { FooterComponent } from '../footer/footer.component';
 import { PerfilComponent } from '../perfil/perfil.component';
 import { ChatbotComponent } from '../chatbot/chatbot.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NgIf } from '@angular/common';
 import { ScrollService } from '../../services/scroll.service';
@@ -28,7 +28,8 @@ import { ScrollService } from '../../services/scroll.service';
     ChatbotComponent,
     RouterOutlet,
     NgIf,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -39,7 +40,8 @@ export class NavbarComponent {
   isAdmin: boolean = false;
   constructor(
     private authService: AuthService,
-    private scrollService: ScrollService
+    private scrollService: ScrollService,
+    private router: Router
   ) {
   }
 
@@ -65,5 +67,15 @@ export class NavbarComponent {
 
   scrollToElement(id: string) {
     this.scrollService.scrollToElementId(id);
+  }
+
+  scrollToTop() {
+    if (this.router.url === '/inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/inicio']).then(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
   }
 }
