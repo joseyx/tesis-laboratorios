@@ -3,6 +3,8 @@
     <div class="table-container">
       <h1 class="display-6 mb-4 text-center">Listado Completo de Citas del Laboratorio</h1>
 
+      <app-modal-confirmar *ngIf="showModal" [message]="modalMessage" (confirm)="onConfirm($event)"></app-modal-confirmar>
+
       <div class="table-responsive">
         <table class="table table-striped table-bordered">
           <thead class="bg-primary text-white">

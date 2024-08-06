@@ -10,10 +10,10 @@ import { NgIf } from '@angular/common';
   templateUrl: './request-password-reset.component.html',
   styleUrl: './request-password-reset.component.scss'
 })
-export class RequestPasswordResetComponent {
+export class RequestPasswordResetComponent implements OnInit {
   resetForm: FormGroup;
-  message: string = '';
-  error: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.resetForm = this.fb.group({
@@ -21,20 +21,22 @@ export class RequestPasswordResetComponent {
     });
   }
 
+  ngOnInit(): void {}
+
   async onSubmit() {
     if (this.resetForm.valid) {
-      this.authService.requestPasswordReset(this.resetForm.value.email).then(
-        response => {
-          this.message = response.success;
-          this.error = '';
-        },
-        error => {
-          this.error = error.error;
-          this.message = '';
-        }
-      );
+      try {
+        const response = await this.authService.requestPasswordReset(this.resetForm.value.email);
+        this.successMessage = 'Se ha enviado un enlace de restablecimiento de contraseña a su correo electrónico.';
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.detail || 'Ocurrió un error al solicitar el restablecimiento de la contraseña. Asegúrese de haber ingresado el correo correcto.';
+        this.successMessage = '';
+      }
     } else {
       this.resetForm.get('email')?.markAsTouched();
+      this.errorMessage = 'Por favor, ingrese una dirección de correo electrónico válida.';
+      this.successMessage = '';
     }
   }
 }

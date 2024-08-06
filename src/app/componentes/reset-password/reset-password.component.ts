@@ -13,7 +13,8 @@ import { NgIf } from '@angular/common';
 })
 export class ResetPasswordComponent implements OnInit {
   resetForm: FormGroup;
-  message: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';;
   token: string = '';
   uidb64: string = '';
 
@@ -23,8 +24,9 @@ export class ResetPasswordComponent implements OnInit {
     private authService: AuthService
   ) {
     this.resetForm = this.fb.group({
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]],
+      password2: ['', [Validators.required]]
+    }, { validator: this.passwordsMatchValidator});
   }
 
   ngOnInit(): void {
@@ -34,17 +36,34 @@ export class ResetPasswordComponent implements OnInit {
     console.log('Uidb64:', this.uidb64);
   }
 
+  passwordsMatchValidator(form: FormGroup) {
+    return form.get('password')?.value === form.get('password2')?.value ? null : { mismatch: true };
+  }
+
+  get password() {
+    return this.resetForm.get('password');
+  }
+
+  get password2() {
+    return this.resetForm.get('password2');
+  }
+
   async onSubmit() {
     if (this.resetForm.valid) {
       const password = this.resetForm.value.password;
-      console.log('Password:', password);
-      console.log('Token:', this.token);
-      console.log('UIDB64:', this.uidb64);
-      const response = await this.authService.setNewPassword(this.uidb64, this.token, password);
-      if (response.success) {
-        this.message = 'Contraseña reestablecida correctamente';
-      } else {
-        this.message = response.message || 'Error al reestablecer la contraseña';
+      try {
+        const response = await this.authService.setNewPassword(this.uidb64, this.token, password);
+        this.successMessage = 'Contraseña reestablecida correctamente';
+        this.errorMessage = '';
+      } catch (error: any) {
+        this.errorMessage = error.message || 'Error al reestablecer la contraseña';
+        this.successMessage = '';
+      }
+    } else {
+      this.resetForm.get('password')?.markAsTouched();
+      this.resetForm.get('password2')?.markAsTouched();
+      if (this.resetForm.errors?.['mismatch']) {
+        this.errorMessage = 'Las contraseñas no coinciden';
       }
     }
   }

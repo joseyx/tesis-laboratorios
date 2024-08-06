@@ -70,16 +70,6 @@ export class UsersEditComponent implements OnInit, AfterViewInit {
     })
   }
 
-  // updateUser() {
-  //   this.userService.updateUser(this.userID, this.user).subscribe({
-  //     next: (response) => {
-  //       console.log('User updated successfully!', response);
-  //       this.router.navigate(['/users']);
-  //     },
-  //     error: (error) => console.error('There was an error!', error)
-  //   })
-  // }
-
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
       try {

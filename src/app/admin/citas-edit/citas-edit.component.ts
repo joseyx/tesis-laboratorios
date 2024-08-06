@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { UsuariosService } from '../../services/usuarios.service';
 import { CitasService } from '../../services/citas.service';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -16,7 +15,7 @@ import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
 export class CitasEditComponent implements OnInit, AfterViewInit {
   cita: any = {
     date: '',
-    status: '',
+    estado: '',
   };
 
   errorMessage = '';
@@ -26,7 +25,6 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
   minDate: string = '';
 
   constructor(
-    private userService: UsuariosService,
     private authService: AuthService,
     private citaService: CitasService,
     private router: Router,
@@ -41,7 +39,7 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
 
     const today = new Date();
     const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
     const dd = String(today.getDate()).padStart(2, '0');
     this.minDate = `${yyyy}-${mm}-${dd}`;
   }
@@ -54,63 +52,56 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
 
   checkAutofill() {
     const dateInput = document.querySelector('input[name="date"]');
-    const statusInput = document.querySelector('input[name="status"]');
+    const estadoInput = document.querySelector('input[name="estado"]');
     // @ts-ignore
     if (dateInput && (dateInput as HTMLInputElement).value) {
       dateInput.closest('.input-div')?.classList.add('focus');
     }
     // @ts-ignore
-    if (statusInput && (statusInput as HTMLInputElement).value) {
-      statusInput.closest('.input-div')?.classList.add('focus');
+    if (estadoInput && (estadoInput as HTMLInputElement).value) {
+      estadoInput.closest('.input-div')?.classList.add('focus');
     }
   }
 
   getCita(id: number) {
     this.citaService.getCitaID(id).subscribe({
       next: (cita: any) => {
-        this.cita = cita;
+        this.cita.date = cita.date;
+        this.cita.estado = cita.estado;
         console.log('Cita fetched succssfully', cita);
       },
       error: (error) => console.log('There was an error!', error)
     })
   }
 
-  // updateCita() {
-  //   this.citaService.updateCita(this.citaID, this.cita).subscribe({
-  //     next: (response) => {
-  //       console.log('Cita updated successfully!', response);
-  //       this.router.navigate(['/citas-table']);
-  //     },
-  //     error: (error) => console.log('There was an error!', error)
-  //   })
-  // }
-
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
+      console.log('Cita to update:', this.cita); // Verifica que los datos sean correctos
       try {
-        const response = await this.citaService.updateCita(this.citaID, this.cita);
+        const response = await this.citaService.updateCita(this.citaID, this.cita).toPromise();
         console.log('Cita updated successfully', response);
         this.successMessage = 'Cita actualizada exitosamente.';
         setTimeout(() => {
           this.router.navigate(['/citas-table']);
         }, 2000);
-      } catch (error) {
-        console.error('Error updating user', error);
-        // @ts-ignore
-        if (error.response && error.response.data) {
-          // @ts-ignore
-          if (error.response.data.error === 'Date not valid') {
-            this.errorMessage = 'Seleccione una fecha válida.';
+      } catch (error: unknown) {
+        console.error('Error updating cita', error);
+
+        // Manejo de errores de tipo unknown
+        if (error instanceof Error) {
+          // Esto es una instancia de Error estándar
+          if (error.message) {
+            this.errorMessage = error.message;
           } else {
-            // @ts-ignore
-            this.errorMessage = error.response.data.detail || 'Error en el registro. Por favor, inténtalo de nuevo más tarde.';
+            this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
           }
         } else {
-          this.errorMessage = 'Error en el registro. Por favor, inténtalo de nuevo más tarde.';
+          // Manejo para otros tipos de error
+          this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
         }
       }
     } else {
-      console.log('Form is invalid or passwords do not match');
+      console.log('Form is invalid');
     }
   }
 }

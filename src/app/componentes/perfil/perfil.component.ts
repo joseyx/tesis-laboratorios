@@ -20,12 +20,6 @@ import { ModalConfirmarComponent } from '../modal-confirmar/modal-confirmar.comp
   styleUrl: './perfil.component.scss'
 })
 export class PerfilComponent implements OnInit {
-  // citas = [
-  //   { fecha: '2024-07-01', tipo: 'Examen de Sangre', estado: 'Completada' },
-  //   { fecha: '2024-07-15', tipo: 'Análisis de Orina', estado: 'Pendiente' },
-  //   { fecha: '2024-07-20', tipo: 'Prueba de Alergia', estado: 'Cancelada' },
-  //   { fecha: '2024-07-25', tipo: 'Control General', estado: 'Pendiente' },
-  // ];
   private citasService = inject(CitasService);
   private authService = inject(AuthService);
   private router = inject(Router);

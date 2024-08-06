@@ -65,15 +65,17 @@ export class AuthService {
   }
 
   async requestPasswordReset(email: string) {
-    const resetData = {
-      email: email,
-    };
+    const resetData = { email };
 
     try {
       const response = await this.axiosService.post('request-reset-email', resetData);
       return response.data;
-    } catch (error) {
-      return { message: 'Error sending reset link'};
+    } catch (error: unknown) {
+      if ((error as any).response) {
+        throw (error as any).response.data;
+      } else {
+        throw new Error('Error al enviar el correo electrónico de restablecimiento de contraseña');
+      }
     }
   }
 
@@ -97,7 +99,7 @@ export class AuthService {
       const response = await this.axiosService.patch('password-reset-complete', resetData);
       return response.data;
     } catch (error) {
-      return { message: 'Error resetting password' };
+      return { message: 'Error al reestablecer la contraseña' };
     }
   }
 
@@ -107,6 +109,10 @@ export class AuthService {
 
   private getAccessToken(): string | null {
     return this.cookieService.get('accessToken');
+  }
+
+  public getToken(): string | null {
+    return this.getAccessToken();
   }
 
   isUserLoggedIn(): boolean {
