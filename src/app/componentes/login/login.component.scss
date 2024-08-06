@@ -103,7 +103,7 @@ form {
     bottom: -2px;
     width: 0%;
     height: 2px;
-    background-color: #38d39f;
+    background-color: #0056b3;
     transition: .4s;
 }
 
@@ -125,7 +125,7 @@ form {
 }
 
 .input-div.focus > .i > i {
-    color: #38d39f;
+    color: #0056b3;
 }
 
 .input-div > div > input {
@@ -157,7 +157,7 @@ a {
 }
 
 a:hover {
-    color: #38d39f;
+    color: #0056b3;
 }
 
 .btn {
@@ -167,7 +167,7 @@ a:hover {
     border-radius: 25px;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    background-image: linear-gradient(to right, #007BFF, #007BFF, #007BFF);
     background-size: 200%;
     font-size: 1.2rem;
     color: #fff;
@@ -175,11 +175,14 @@ a:hover {
     text-transform: uppercase;
     margin: 1rem 0;
     cursor: pointer;
-    transition: .5s;
+    //transition: .5s;
+    transition: background-image 0.5s, box-shadow 0.5s;
 }
 
 .btn:hover {
     background-position: right;
+    background-image: linear-gradient(to right, #0056b3, #0056b3, #0056b3); /* Color más oscuro al pasar el cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agregar una sombra */
 }
 
 .error {
@@ -290,4 +293,11 @@ a:hover {
 
 .hide {
     display: none;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
 }
