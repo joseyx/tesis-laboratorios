@@ -64,43 +64,42 @@ export class AuthService {
     return response.data;
   }
 
-  // async forgotPassword(email: string) {
-  //   const forgotData = {
-  //     email: email,
-  //   };
-  //   try {
-  //     const response = await this.axiosService.post(
-  //       'auth/forgotPassword',
-  //       forgotData
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     return { message: 'Error sending reset link.' };
-  //   }
-  // }
+  async requestPasswordReset(email: string) {
+    const resetData = {
+      email: email,
+    };
 
-  // async resetPassword(
-  //   token: string,
-  //   email: string,
-  //   password: string,
-  //   confirmPassword: string
-  // ) {
-  //   const resetData = {
-  //     token: token,
-  //     email: email,
-  //     password: password,
-  //     confirmPassword: confirmPassword,
-  //   };
-  //   try {
-  //     const response = await this.axiosService.post(
-  //       'auth/resetPassword',
-  //       resetData
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     return { message: 'Error resetting password.' };
-  //   }
-  // }
+    try {
+      const response = await this.axiosService.post('request-reset-email', resetData);
+      return response.data;
+    } catch (error) {
+      return { message: 'Error sending reset link'};
+    }
+  }
+
+  async validateResetToken(uidb64: string, token: string) {
+    try {
+      const response = await this.axiosService.get(`password-reset/${uidb64}/${token}`);
+      return response.data
+    } catch (error) {
+      return { message: 'Invalid or expired token' };
+    }
+  }
+
+  async setNewPassword(uidb64: string, token: string, password: string) {
+    const resetData = {
+      uidb64: uidb64,
+      token: token,
+      password: password,
+    };
+
+    try {
+      const response = await this.axiosService.patch('password-reset-complete', resetData);
+      return response.data;
+    } catch (error) {
+      return { message: 'Error resetting password' };
+    }
+  }
 
   private storeAccessToken(token: string): void {
     this.cookieService.set('accessToken', token, undefined, '/'); // Path for cookie access

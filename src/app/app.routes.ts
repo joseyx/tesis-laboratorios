@@ -13,6 +13,8 @@ import { UsersCreateComponent } from './admin/users-create/users-create.componen
 import { UsersEditComponent } from './admin/users-edit/users-edit.component';
 import { CitasTableComponent } from './admin/citas-table/citas-table.component';
 import { CitasEditComponent } from './admin/citas-edit/citas-edit.component';
+import { RequestPasswordResetComponent } from './componentes/request-password-reset/request-password-reset.component';
+import { ResetPasswordComponent } from './componentes/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -65,6 +67,14 @@ export const routes: Routes = [
       {
         path: 'users-edit/:id',
         component: UsersEditComponent
+      },
+      {
+        path: 'reestablecer-clave',
+        component: RequestPasswordResetComponent
+      },
+      {
+        path: 'reestablecer-clave/:uidb64/:token',
+        component: ResetPasswordComponent
       },
       {
         path: '**',
