@@ -71,6 +71,7 @@ export class UsersCreateComponent implements AfterViewInit {
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
       try {
+        this.user.role = '';
         const response = await this.userService.createUser(this.user);
         console.log('User updated successfully', response);
         this.successMessage = 'Usuario actualizado exitosamente.';

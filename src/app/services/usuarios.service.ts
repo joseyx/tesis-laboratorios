@@ -32,9 +32,13 @@ export class UsuariosService {
     return response.data;
   }
 
-  createUser(user: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(baseUrl, user, { headers });
+  // createUser(user: any): Observable<any> {
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   return this.http.post(baseUrl, user, { headers });
+  // }
+  async createUser(user: UserInterface) {
+    const response = await this.axiosService.post('users', user);
+    return response.data;
   }
 
   async updateUser(user: UserInterface) {
