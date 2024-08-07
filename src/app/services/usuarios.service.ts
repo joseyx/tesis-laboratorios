@@ -24,8 +24,12 @@ export class UsuariosService {
   }
 
 
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+  // getUser(id: number): Observable<any> {
+  //   return this.http.get(`${baseUrl}/${id}`);
+  // }
+  async getUser(id: number) {
+    const response = await this.axiosService.get(`users/${id}`);
+    return response.data;
   }
 
   createUser(user: any): Observable<any> {

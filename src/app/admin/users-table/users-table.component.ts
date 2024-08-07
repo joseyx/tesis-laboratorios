@@ -3,6 +3,8 @@ import { NgForOf, NgIf } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { ModalConfirmarComponent } from '../../componentes/modal-confirmar/modal-confirmar.component';
+import { UserInterface } from '../../utils/interfaces';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-users-table',
@@ -18,13 +20,23 @@ import { ModalConfirmarComponent } from '../../componentes/modal-confirmar/modal
 export class UsersTableComponent {
   private userService = inject(UsuariosService);
   private router = inject(Router);
+  private authService = inject(AuthService);
   users: any[] = [];
+  loggedUser:UserInterface = {
+    id: 0,
+    name: '',
+    email: '',
+    role: '',
+    image: '',
+    phone: '',
+  };
   showModal: boolean = false;
   modalMessage: string = '';
   userToCancel: number | null = null;
 
   ngOnInit(): void {
     this.getUsers();
+    this.getUser();
   }
 
   getUsers() {
@@ -34,6 +46,12 @@ export class UsersTableComponent {
     }).catch((error) => {
       console.error('Error fetching users', error);
     });
+  }
+
+  async getUser() {
+    const response = await this.authService.getUser()
+    console.log('User fetched', response);
+    this.loggedUser = response;
   }
 
   createUser(){

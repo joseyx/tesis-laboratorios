@@ -25,10 +25,15 @@ export class CitasService {
     return response.data;
   }
 
-  getCitaID(id: any): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`, {
-      headers: this.getAuthHeaders()
-    });
+  // getCitaID(id: any): Observable<any> {
+  //   return this.http.get(`${baseUrl}/${id}`, {
+  //     headers: this.getAuthHeaders()
+  //   });
+  // }
+
+  async getCitaID(id: any) {
+    const response = await this.axiosService.get(`citas/${id}`);
+    return response.data;
   }
   //
   // getAllCitas(): Observable<any> {

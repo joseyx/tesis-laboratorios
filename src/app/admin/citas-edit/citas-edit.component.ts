@@ -4,6 +4,8 @@ import { CitasService } from '../../services/citas.service';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { CitaInterface } from '../../utils/interfaces';
+import { formatDateToInputValue } from '../../helpers/helpers';
 
 @Component({
   selector: 'app-citas-edit',
@@ -63,21 +65,23 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getCita(id: number) {
-    this.citaService.getCitaID(id).subscribe({
-      next: (cita: any) => {
-        this.cita.date = cita.date;
-        this.cita.estado = cita.estado;
-        console.log('Cita fetched succssfully', cita);
-      },
-      error: (error) => console.log('There was an error!', error)
-    })
+  async getCita(id: number) {
+    const response = await this.citaService.getCitaID(id);
+
+    this.cita = response.data;
+    this.cita.date = formatDateToInputValue(this.cita.date);
+    console.log('Cita fetched successfully', this.cita);
   }
 
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
       console.log('Cita to update:', this.cita); // Verifica que los datos sean correctos
       try {
+        if (!this.cita.resultado || this.cita.resultado == 'Pendiente') {
+          this.cita.resultado = 'Pendiente';
+
+        }
+        console.log('Cita to update:', this.cita); // Verifica que los datos sean correctos
         const response = await this.citaService.updateCita(this.citaID, this.cita).toPromise();
         console.log('Cita updated successfully', response);
         this.successMessage = 'Cita actualizada exitosamente.';

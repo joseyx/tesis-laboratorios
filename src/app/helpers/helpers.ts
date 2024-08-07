@@ -15,3 +15,14 @@ export function formatDateTime(datetime: string): string {
 
   return new Intl.DateTimeFormat('es-ES', options).format(date);
 }
+
+export function formatDateToInputValue(date: string): string {
+  const formattedDate = new Date(date);
+  const year = formattedDate.getUTCFullYear();
+  const month = String(formattedDate.getUTCMonth() + 1).padStart(2, '0'); // Meses son 0-11 en JavaScript
+  const day = String(formattedDate.getUTCDate()).padStart(2, '0');
+  const hours = String(formattedDate.getUTCHours()).padStart(2, '0');
+  const minutes = String(formattedDate.getUTCMinutes()).padStart(2, '0');
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+}

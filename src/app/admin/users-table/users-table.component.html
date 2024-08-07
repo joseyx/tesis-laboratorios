@@ -30,8 +30,9 @@
               </td>
               <td data-label="Rol">{{ capitalizeFirstLetter(user.role) }}</td>
               <td data-label="Acción">
-                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user.id)">Editar</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Eliminar</button>
+                <button class="btn btn-secondary btn-sm me-2" *ngIf="loggedUser.id != user.id" (click)="editUser(user.id)">Editar</button>
+                <button class="btn btn-danger btn-sm" *ngIf="loggedUser.id != user.id" (click)="deleteUser(user.id)">Eliminar</button>
+                <p *ngIf="loggedUser.id == user.id">Usuario Actual</p>
               </td>
             </tr>
           </tbody>

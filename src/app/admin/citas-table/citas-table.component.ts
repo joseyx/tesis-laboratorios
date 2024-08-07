@@ -25,12 +25,12 @@ export class CitasTableComponent implements OnInit {
     this.getCitas();
   }
 
-  getCitas() {
-    const response = this.citaService.getAllCitas();
-    response.then((citas) => {
-      this.citas = citas;
-    });
-    // for loop through citas
+  async getCitas() {
+    const response = await this.citaService.getAllCitas();
+    console.log('Citas fetched', response);
+    this.citas = response;
+
+    console.log('Citas fetched successfully', this.citas);
     for (let cita of this.citas) {
       cita.date = formatDateTime(cita.date);
       cita.estado = cita.estado.charAt(0).toUpperCase() + cita.estado.slice(1);
@@ -38,7 +38,7 @@ export class CitasTableComponent implements OnInit {
   }
 
   editCita(id: number) {
-    this.router.navigate(['/citas-edit', id]);
+    this.router.navigate(['/citas-edit', id]).then(r => console.log('Redirected to citas-edit'));
   }
 
   deleteCita(id: number) {

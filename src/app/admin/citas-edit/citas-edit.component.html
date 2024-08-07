@@ -4,7 +4,7 @@
     <form #updateForm="ngForm" class="form" (ngSubmit)="onSubmit(updateForm)">
       <div class="input-box">
         <label for="date">Fecha de la Cita:</label>
-        <input type="date" id="date" [(ngModel)]="cita.date" [min]="minDate" name="date" />
+        <input type="datetime-local" id="date" [(ngModel)]="cita.date" [min]="minDate" name="date" />
       </div>
       <div class="role-selection">
         <div class="role-label">
