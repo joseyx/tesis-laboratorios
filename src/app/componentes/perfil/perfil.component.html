@@ -26,6 +26,7 @@
                 <th>Tipo de Cita</th>
                 <th>Estado</th>
                 <th>Acción</th>
+                <th>Resultados</th>
               </tr>
             </thead>
             <tbody>
@@ -35,6 +36,10 @@
                 <td data-label="Estado">{{ cita.estado }}</td>
                 <td data-label="Accion">
                   <button class="btn btn-danger" (click)="cancelCita(cita.id)">Cancelar</button>
+                </td>
+                <td data-label="Resultados">
+                  <a *ngIf="cita.resultado" class="results" (click)="verResultados(cita.id)">Ver Resultados</a>
+                  <span *ngIf="!cita.resultado">No disponible</span>
                 </td>
               </tr>
             </tbody>

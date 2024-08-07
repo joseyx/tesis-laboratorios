@@ -28,6 +28,10 @@
           <div *ngIf="roleField.errors?.['required']">El estado es obligatorio.</div>
         </div>
       </div>
+      <div class="input-box">
+        <label for="results">Resultados:</label>
+        <input type="file" id="results" (change)="onFileSelected($event)" accept=".pdf,.doc,.docx" name="results" />
+      </div>
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>

@@ -27,6 +27,7 @@ export class CitasTableComponent implements OnInit {
   getCitas(): void {
     this.citaService.getAllCitas().subscribe({
       next: (response) => {
+        console.log('Citas fetched successfully', response); // Depuración
         this.citas = response;
         for (const cita of this.citas) {
           cita.date = formatDateTime(cita.date);
@@ -73,6 +74,14 @@ export class CitasTableComponent implements OnInit {
     }
   }
 
+  verResultados(id: number) {
+    const cita = this.citas.find(c => c.id === id);
+    if (cita && cita.resultado) {
+      window.open(cita.resultado, '_blank');
+    } else {
+      alert('No hay resultados disponibles para esta cita.');
+    }
+  }
 
   capitalizeFirstLetter(name: string): string {
     if (!name) return '';

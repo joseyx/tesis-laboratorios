@@ -4,6 +4,7 @@ import { CitasService } from '../../services/citas.service';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgClass, NgIf, NgOptimizedImage } from '@angular/common';
+import { Storage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-citas-edit',
@@ -16,8 +17,10 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
   cita: any = {
     date: '',
     estado: '',
+    resultado: '',
   };
 
+  selectedFile: File | null = null;
   errorMessage = '';
   successMessage = '';
 
@@ -29,6 +32,7 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
     private citaService: CitasService,
     private router: Router,
     private route: ActivatedRoute,
+    private storage: Storage,
   ) {}
 
   ngOnInit(): void {
@@ -74,12 +78,56 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
     })
   }
 
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  // async onSubmit(form: NgForm): Promise<void> {
+  //   if (form.valid) {
+  //     console.log('Cita to update:', this.cita); // Verifica que los datos sean correctos
+  //     try {
+  //       const response = await this.citaService.updateCita(this.citaID, this.cita).toPromise();
+  //       console.log('Cita updated successfully', response);
+  //       this.successMessage = 'Cita actualizada exitosamente.';
+  //       setTimeout(() => {
+  //         this.router.navigate(['/citas-table']);
+  //       }, 2000);
+  //     } catch (error: unknown) {
+  //       console.error('Error updating cita', error);
+
+  //       // Manejo de errores de tipo unknown
+  //       if (error instanceof Error) {
+  //         // Esto es una instancia de Error estándar
+  //         if (error.message) {
+  //           this.errorMessage = error.message;
+  //         } else {
+  //           this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
+  //         }
+  //       } else {
+  //         // Manejo para otros tipos de error
+  //         this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
+  //       }
+  //     }
+  //   } else {
+  //     console.log('Form is invalid');
+  //   }
+  // }
+
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {
-      console.log('Cita to update:', this.cita); // Verifica que los datos sean correctos
       try {
+        if (this.selectedFile) {
+          const filePath = `resultados/${this.selectedFile.name}`;
+          const fileRef = ref(this.storage, filePath);
+          await uploadBytes(fileRef, this.selectedFile);
+          const fileUrl = await getDownloadURL(fileRef);
+          console.log('File URL:', fileUrl); // Depuración
+          this.cita.resultado = fileUrl;
+        }
+
+        console.log('Cita to update:', this.cita); // Depuración
         const response = await this.citaService.updateCita(this.citaID, this.cita).toPromise();
-        console.log('Cita updated successfully', response);
+        console.log('Cita updated successfully', response); // Depuración
         this.successMessage = 'Cita actualizada exitosamente.';
         setTimeout(() => {
           this.router.navigate(['/citas-table']);
@@ -87,16 +135,9 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
       } catch (error: unknown) {
         console.error('Error updating cita', error);
 
-        // Manejo de errores de tipo unknown
-        if (error instanceof Error) {
-          // Esto es una instancia de Error estándar
-          if (error.message) {
-            this.errorMessage = error.message;
-          } else {
-            this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
-          }
+        if (error instanceof Error && error.message) {
+          this.errorMessage = error.message;
         } else {
-          // Manejo para otros tipos de error
           this.errorMessage = 'Error en la actualización. Por favor, inténtalo de nuevo más tarde.';
         }
       }
@@ -104,4 +145,15 @@ export class CitasEditComponent implements OnInit, AfterViewInit {
       console.log('Form is invalid');
     }
   }
+
+  // uploadFile($event: any) {
+  //   const file = $event.target.files[0];
+  //   console.log('File selected:', file);
+
+  //   const filePath = ref(this.storage, `resultados/${file.name}`);
+
+  //   uploadBytes(filePath, file)
+  //   .then(response => console.log('File uploaded successfully', response, this.successMessage = 'Archivo subido exitosamente'))
+  //   .catch(error => console.error('Error uploading file', error, this.errorMessage = 'Error al subir el archivo'));
+  // }
 }

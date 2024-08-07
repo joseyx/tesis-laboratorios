@@ -97,4 +97,13 @@ export class PerfilComponent implements OnInit {
       this.citaToCancel = null;
     }
   }
+
+  verResultados(id: number) {
+    const cita = this.citas.find(c => c.id === id);
+    if (cita && cita.resultado) {
+      window.open(cita.resultado, '_blank');
+    } else {
+      alert('No hay resultados disponibles para esta cita.');
+    }
+  }
 }
