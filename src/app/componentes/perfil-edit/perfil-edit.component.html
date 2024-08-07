@@ -34,16 +34,16 @@
 <!--          </div>-->
 <!--        </div>-->
       </div>
-      <div class="input-box">
-        <label for="imagen">Imagen de Perfil:</label>
-        <input type="file" id="imagen" [(ngModel)]="user.image" (change)="onFileChange($event)" name="imagen" #imageInput #imageField="ngModel" />
-        <div *ngIf="user.image">
-          <img ngSrc="{{user.image}}" alt="Vista previa de la imagen" style="max-width: 100px; max-height: 100px;"/>
-        </div>
-        <div *ngIf="imageField.invalid && (imageField.dirty || imageField.touched)" class="error">
-          <div *ngIf="imageField.errors?.['required']">La imagen es obligatoria.</div>
-        </div>
-      </div>
+<!--      <div class="input-box">-->
+<!--        <label for="imagen">Imagen de Perfil:</label>-->
+<!--        <input type="file" id="imagen" [(ngModel)]="user.image" (change)="onFileChange($event)" name="imagen" #imageInput #imageField="ngModel" />-->
+<!--        <div *ngIf="user.image">-->
+<!--          <img ngSrc="{{user.image}}" alt="Vista previa de la imagen" style="max-width: 100px; max-height: 100px;"/>-->
+<!--        </div>-->
+<!--        <div *ngIf="imageField.invalid && (imageField.dirty || imageField.touched)" class="error">-->
+<!--          <div *ngIf="imageField.errors?.['required']">La imagen es obligatoria.</div>-->
+<!--        </div>-->
+<!--      </div>-->
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
