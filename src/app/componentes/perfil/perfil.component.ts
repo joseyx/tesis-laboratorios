@@ -83,7 +83,7 @@ export class PerfilComponent implements OnInit {
     this.showModal = false;
     if (result && this.citaToCancel !== null) {
       console.log(`Cita con id ${this.citaToCancel} cancelada`);
-      this.citasService.deleteCita(this.citaToCancel).subscribe({
+      this.citasService.updateCita(this.citaToCancel, { estado: 'cancelada' }).subscribe({
         next: (response) => {
           console.log('Cita cancelada', response);
           alert('Cita cancelada exitosamente');
