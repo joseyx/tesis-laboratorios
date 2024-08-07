@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NgIf, NgOptimizedImage } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -11,13 +11,19 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   focus = false;
   email = '';
   password = '';
   errorMessage = ''
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    if (this.authService.isUserLoggedIn()) {
+      this.router.navigate(['/']).then(r => console.log('Redirected to home'));
+    }
+  }
 
   setFocus(hasFocus: boolean) {
     this.focus = hasFocus;
