@@ -28,8 +28,8 @@
                 <button class="btn btn-danger btn-sm" (click)="deleteCita(cita.id)">Eliminar</button>
               </td>
               <td data-label="Resultados">
-                <a *ngIf="cita.resultado" class="results" (click)="verResultados(cita.id)">Ver Resultados</a>
-                <span *ngIf="!cita.resultado">No disponible</span>
+                <a *ngIf="cita.resultado && cita.resultado != 'Pendiente'" class="results" (click)="verResultados(cita.id)">Ver Resultados</a>
+                <span *ngIf="!cita.resultado || cita.resultado=='Pendiente'">No disponible</span>
               </td>
             </tr>
           </tbody>
