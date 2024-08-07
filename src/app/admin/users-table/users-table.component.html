@@ -7,6 +7,7 @@
         <button class="btn btn-primary create-button" (click)="createUser()">+ Agregar Usuario</button>
       </div>
 
+      <app-modal-confirmar *ngIf="showModal" [message]="modalMessage" (confirm)="onConfirm($event)"></app-modal-confirmar>
 
       <div class="table-responsive">
         <table class="table table-striped table-bordered">
@@ -15,23 +16,22 @@
               <th>Nombre</th>
               <th>Correo Electrónico</th>
               <th>Número de Teléfono</th>
-              <th>Imagen</th>
               <th>Rol</th>
               <th>Acción</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
-              <td data-label="Nombre">{{ user.name }}</td>
+              <td data-label="Nombre">{{ capitalizeFirstLetter(user.name) }}</td>
               <td data-label="Correo Electrónico">{{ user.email }}</td>
-              <td data-label="Número de Teléfono">{{ user.phone }}</td>
-              <td data-label="Imagen">
-                <img [src]="user.image" alt="Imagen" class="img-fluid rounded" style="max-width: 50px;">
+              <td data-label="Número de Teléfono">
+                {{ user.phone }}
+                <p *ngIf="!user.phone">No posee un número de telefóno registrado</p>
               </td>
-              <td data-label="Rol">{{ user.role.charAt(0).toUpperCase() + user.role.slice(1) }}</td>
+              <td data-label="Rol">{{ capitalizeFirstLetter(user.role) }}</td>
               <td data-label="Acción">
-                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user)">Editar</button>
-                <button class="btn btn-danger btn-sm" (click)="deleteUser(user)">Eliminar</button>
+                <button class="btn btn-secondary btn-sm me-2" (click)="editUser(user.id)">Editar</button>
+                <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Eliminar</button>
               </td>
             </tr>
           </tbody>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { AxiosService } from './axios.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,8 @@ import { AxiosService } from './axios.service';
 export class AuthService {
   constructor(
     private axiosService: AxiosService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router
   ) {
   }
 
@@ -58,46 +60,48 @@ export class AuthService {
   async logout() {
     const response = await this.axiosService.post('logout', {});
     this.cookieService.delete('accessToken');
+    this.router.navigate(['/inicio']);
     return response.data;
   }
 
-  // async forgotPassword(email: string) {
-  //   const forgotData = {
-  //     email: email,
-  //   };
-  //   try {
-  //     const response = await this.axiosService.post(
-  //       'auth/forgotPassword',
-  //       forgotData
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     return { message: 'Error sending reset link.' };
-  //   }
-  // }
+  async requestPasswordReset(email: string) {
+    const resetData = { email };
 
-  // async resetPassword(
-  //   token: string,
-  //   email: string,
-  //   password: string,
-  //   confirmPassword: string
-  // ) {
-  //   const resetData = {
-  //     token: token,
-  //     email: email,
-  //     password: password,
-  //     confirmPassword: confirmPassword,
-  //   };
-  //   try {
-  //     const response = await this.axiosService.post(
-  //       'auth/resetPassword',
-  //       resetData
-  //     );
-  //     return response.data;
-  //   } catch (error) {
-  //     return { message: 'Error resetting password.' };
-  //   }
-  // }
+    try {
+      const response = await this.axiosService.post('request-reset-email', resetData);
+      return response.data;
+    } catch (error: unknown) {
+      if ((error as any).response) {
+        throw (error as any).response.data;
+      } else {
+        throw new Error('Error al enviar el correo electrónico de restablecimiento de contraseña');
+      }
+    }
+  }
+
+  async validateResetToken(uidb64: string, token: string) {
+    try {
+      const response = await this.axiosService.get(`password-reset/${uidb64}/${token}`);
+      return response.data
+    } catch (error) {
+      return { message: 'Invalid or expired token' };
+    }
+  }
+
+  async setNewPassword(uidb64: string, token: string, password: string) {
+    const resetData = {
+      uidb64: uidb64,
+      token: token,
+      password: password,
+    };
+
+    try {
+      const response = await this.axiosService.patch('password-reset-complete', resetData);
+      return response.data;
+    } catch (error) {
+      return { message: 'Error al reestablecer la contraseña' };
+    }
+  }
 
   private storeAccessToken(token: string): void {
     this.cookieService.set('accessToken', token, undefined, '/'); // Path for cookie access
@@ -105,6 +109,10 @@ export class AuthService {
 
   private getAccessToken(): string | null {
     return this.cookieService.get('accessToken');
+  }
+
+  public getToken(): string | null {
+    return this.getAccessToken();
   }
 
   isUserLoggedIn(): boolean {
