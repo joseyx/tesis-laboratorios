@@ -73,6 +73,14 @@ export class CitasTableComponent implements OnInit {
     }
   }
 
+  verResultados(id: number) {
+    const cita = this.citas.find(c => c.id === id);
+    if (cita && cita.resultado) {
+      window.open(cita.resultado, '_blank');
+    } else {
+      alert('No hay resultados disponibles para esta cita.');
+    }
+  }
 
   capitalizeFirstLetter(name: string): string {
     if (!name) return '';
