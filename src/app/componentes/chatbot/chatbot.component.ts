@@ -127,9 +127,12 @@ export class ChatbotComponent implements OnInit, AfterViewChecked {
     // Format bold text (**text**) and convert links to clickable
     const formattedText = text
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Replace **text** with <strong>text</strong>
-      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank">$1</a>') // Replace [text](url) with <a href="url" target="_blank">text</a>
-      .replace(/(http:\/\/localhost:4200\/citas)/g, '<a href="$1" target="_self">Realiza tu cita</a>'); // Replace http://localhost:4200/citas with a clickable link
+      .replace(/\[(.*?)\]\((http:\/\/localhost:4200\/citas)\)/g, '<a href="$2" target="_self">Realiza tu cita</a>') // Specific case for [http://localhost:4200/citas](http://localhost:4200/citas)
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_self">$1</a>') // Replace [text](url) with <a href="url" target="_self">text</a>
+      .replace(/(http:\/\/localhost:4200\/citas)/g, '<a href="$1" target="_self">Realiza tu cita</a>'); // General case for http://localhost:4200/citas
 
     return this.sanitizer.bypassSecurityTrustHtml(formattedText);
   }
+
+
 }
