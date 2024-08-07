@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { UsuariosService } from '../../services/usuarios.service';
 import { AuthService } from '../../services/auth.service';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -60,25 +60,19 @@ export class UsersEditComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getUser(id: number) {
-    this.userService.getUser(id).subscribe({
-      next: (user: any) => {
-        this.user = user;
-        console.log('User fetched succssfully', user);
-      },
-      error: (error) => console.error('There was an error!', error)
-    })
-  }
-
-  // updateUser() {
-  //   this.userService.updateUser(this.userID, this.user).subscribe({
-  //     next: (response) => {
-  //       console.log('User updated successfully!', response);
-  //       this.router.navigate(['/users']);
+  // getUser(id: number) {
+  //   this.userService.getUser(id).subscribe({
+  //     next: (user: any) => {
+  //       this.user = user;
+  //       console.log('User fetched succssfully', user);
   //     },
   //     error: (error) => console.error('There was an error!', error)
   //   })
   // }
+  async getUser(id: number) {
+    this.user = await this.userService.getUser(id);
+    console.log('User fetched successfully', this.user);
+  }
 
   async onSubmit(form: NgForm): Promise<void> {
     if (form.valid) {

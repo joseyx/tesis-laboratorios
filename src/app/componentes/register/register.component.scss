@@ -19,6 +19,7 @@
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 7rem;
   padding: 0 2rem;
+  overflow: hidden;
 }
 
 .img {
@@ -164,7 +165,7 @@ a:hover {
   border-radius: 25px;
   outline: none;
   border: none;
-  background-image: linear-gradient(to right, #007BFF, #007BFF, #007BFF);
+  background-image: linear-gradient(to right, #0066FF, #00b7ff, #0066FF);
   background-size: 200%;
   font-size: 1.2rem;
   color: #fff;
@@ -275,5 +276,5 @@ input:-webkit-autofill:active {
 }
 
 .login {
-  margin-top: 4rem;
+  margin-top: 1rem;
 }

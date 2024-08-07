@@ -32,6 +32,10 @@
                 </div>
                 <a href="../../../index.html" class="h1 text-white mb-0">Lab<span class="text-dark">sky</span></a>
                 <div class="d-flex">
+                  <div *ngIf="isLoggedIn" class="ms-3 mx-5">
+                    <h4 class="text-white mb-0">¡Bienvenido {{ name }}!</h4>
+                    <span>Gusto en verte de nuevo</span>
+                  </div>
                     <i class="bi bi-envelope fs-2"></i>
                     <div class="ms-3">
                         <h5 class="text-white mb-0">Enviar Correo</h5>

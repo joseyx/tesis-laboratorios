@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { UserInterface } from '../utils/interfaces';
 import { AxiosService } from './axios.service';
 
-const baseUrl = 'http://localhost:8000/api/users';
+const baseUrl = 'http://localhost:8080/api/users';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +24,12 @@ export class UsuariosService {
   }
 
 
-  getUser(id: number): Observable<any> {
-    return this.http.get(`${baseUrl}/${id}`);
+  // getUser(id: number): Observable<any> {
+  //   return this.http.get(`${baseUrl}/${id}`);
+  // }
+  async getUser(id: number) {
+    const response = await this.axiosService.get(`users/${id}`);
+    return response.data;
   }
 
   createUser(user: any): Observable<any> {

@@ -4,27 +4,24 @@
     <form #updateForm="ngForm" class="form" (ngSubmit)="onSubmit(updateForm)">
       <div class="input-box">
         <label for="date">Fecha de la Cita:</label>
-        <input type="date" id="date" [(ngModel)]="cita.date" #dateInput required #dateField="ngModel" [min]="minDate" name="date" />
-        <div *ngIf="dateField.invalid && (dateField.dirty || dateField.touched)" class="error">
-          <div *ngIf="dateField.errors?.['required']">La fecha es obligatoria.</div>
-        </div>
+        <input type="datetime-local" id="date" [(ngModel)]="cita.date" [min]="minDate" name="date" />
       </div>
       <div class="role-selection">
         <div class="role-label">
-          <label>Estado de la cita:</label> <!-- Assuming you have a general label for the role -->
+          <label>Estado de la cita:</label>
         </div>
         <div class="radio-buttons">
           <div>
-            <input type="radio" id="status_pendiente" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="pendiente" />
-            <label for="status_pendiente">Pendiente</label>
+            <input type="radio" id="estado_pendiente" [(ngModel)]="cita.estado" #roleInput required #roleField="ngModel" name="estado" value="pendiente" />
+            <label for="estado_pendiente">Pendiente</label>
           </div>
           <div>
-            <input type="radio" id="status_realizada" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="realizada" />
-            <label for="status_realizada">Realizada</label>
+            <input type="radio" id="estado_realizada" [(ngModel)]="cita.estado" #roleInput required #roleField="ngModel" name="estado" value="realizada" />
+            <label for="estado_realizada">Realizada</label>
           </div>
           <div>
-            <input type="radio" id="status_cancelada" [(ngModel)]="cita.status" #roleInput required #roleField="ngModel" name="status" value="cancelada" />
-            <label for="status_cancelada">Cancelada</label>
+            <input type="radio" id="estado_cancelada" [(ngModel)]="cita.estado" #roleInput required #roleField="ngModel" name="estado" value="cancelada" />
+            <label for="estado_cancelada">Cancelada</label>
           </div>
         </div>
         <div *ngIf="roleField.invalid && (roleField.dirty || roleField.touched)" class="error">
