@@ -49,7 +49,7 @@ export class NavbarComponent {
     this.isLoggedIn = this.authService.isUserLoggedIn();
     this.authService.getUser().then((data) => {
       this.name = data.name;
-      if (data.role == 'admin') {
+      if (data.role == 'admin' || data.role == 'medico') {
         this.isAdmin = true;
       }
     });

@@ -40,25 +40,25 @@ export class UsersEditComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.checkAutofill();
-    }, 100);
+    // setTimeout(() => {
+    //   this.checkAutofill();
+    // }, 100);
   }
 
-  checkAutofill() {
-    const imageInput = document.querySelector('input[name="image"]');
-    const roleInput = document.querySelector('input[name="role"]');
-    // @ts-ignore
-    if (imageInput && imageInput['value']) {
-      // @ts-ignore
-      imageInput.closest('.input-div').classList.add('focus');
-    }
-    // @ts-ignore
-    if (roleInput && roleInput['value']) {
-      // @ts-ignore
-      roleInput.closest('.input-div').classList.add('focus');
-    }
-  }
+  // checkAutofill() {
+  //   const imageInput = document.querySelector('input[name="image"]');
+  //   const roleInput = document.querySelector('input[name="role"]');
+  //   // @ts-ignore
+  //   if (imageInput && imageInput['value']) {
+  //     // @ts-ignore
+  //     imageInput.closest('.input-div').classList.add('focus');
+  //   }
+  //   // @ts-ignore
+  //   if (roleInput && roleInput['value']) {
+  //     // @ts-ignore
+  //     roleInput.closest('.input-div').classList.add('focus');
+  //   }
+  // }
 
   // getUser(id: number) {
   //   this.userService.getUser(id).subscribe({
